@@ -102,4 +102,4 @@ datos <- datos %>%        #ojo
 
 # guardar base
 
-save(datos,file="output/data.RData")
+save(datos,file="procesamiento/data/data.RData")
