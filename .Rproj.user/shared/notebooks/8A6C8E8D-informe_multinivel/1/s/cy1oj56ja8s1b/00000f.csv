@@ -1,0 +1,16 @@
+"0","```{r figure1-Interceptos_aleatorios, echo=FALSE, warning=FALSE, message=FALSE }
+"
+"2","G1;H1;Errorh: se intenta usar un nombre de varible de longitud cero
+Error durante el wrapup: no hay tantas estructuras en la pila
+Error: no more error handlers available (recursive errors?); invoking 'abort' restart
+g"
+"0","ggplot(datos, aes(imp_dem, m1, color = país, group = país),"
+"0","      main = ""Interceptos aleatorios"" ) + "
+"0","  geom_smooth(se = FALSE, method = lm)"
+"2","G1;[1m[33mError[39m in `geom_smooth()`:[22m
+[38;5;232m[33m![38;5;232m Problem while computing aesthetics.
+[36mℹ[38;5;232m Error occurred in the 1st layer.[39m
+[1mCaused by error:[22m
+[33m![39m objeto 'm1' no encontrado
+[90mRun `]8;;x-r-run:rlang::last_trace()rlang::last_trace()]8;;` to see where the error occurred.[39m
+g"

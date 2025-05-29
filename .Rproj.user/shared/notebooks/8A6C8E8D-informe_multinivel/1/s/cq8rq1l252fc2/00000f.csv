@@ -1,0 +1,4 @@
+"0","ggplot(datos, aes(imp_dem, m1, color = país, group = país),
+      main = ""Interceptos aleatorios"" ) + 
+  geom_smooth(se = FALSE, method = lm) 
+"

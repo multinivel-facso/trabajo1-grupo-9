@@ -78,7 +78,7 @@ rm(list = ls())
 
 ```{r datos, echo=FALSE, warning=FALSE, message=FALSE}
 
-load(file="data.RData")
+load(file="procesamiento/data/data.RData")
 
 ```
 
