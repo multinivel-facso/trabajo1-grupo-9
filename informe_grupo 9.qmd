@@ -8,7 +8,7 @@ format: html
 editor: visual
 ---
 
-# Abstrac
+# Abstract
 
 En la presente investigación, se estudia cómo inciden las percepciones individuales y los ambientes democráticos nacionales en el apoyo ciudadano a los principios fundamentales de la democracia liberal a nivel mundial. Se utilizaron los datos de World Values Survey (Ola 7) para crear un modelo multinivel; a partir de esto, se realizó un índice de percepción sobre principios de la democracia liberal, compuesto por percepciones respecto a los derechos civiles, las elecciones libres y la igualdad género. Preliminarmente, los resultados indican una varianza significativa entre países (ICC =0,148); en este sentido, la valoración individual a la democracia y la atmosfera democrática nacional muestran efectos positivos en el respaldo democrático, pero tanto el nivel económico cómo el género presentan resultados mixtos.
 

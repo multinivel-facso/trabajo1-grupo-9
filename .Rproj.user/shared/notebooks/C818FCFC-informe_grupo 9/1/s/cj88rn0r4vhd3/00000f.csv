@@ -1,0 +1,10 @@
+"0","```{r tbl-descriptivos-nivel2, echo=FALSE, warning=FALSE, message=FALSE }
+"
+"2","G1;H1;Errorh: se intenta usar un nombre de varible de longitud cero
+Error durante el wrapup: no hay tantas estructuras en la pila
+Error: no more error handlers available (recursive errors?); invoking 'abort' restart
+g"
+"0","agg_datos <- datos %>% group_by(país) %>% summarise_all(mean) %>% as.data.frame()"
+"0","agg_datos %>% select(cuan_dem, prom_imp_dem) %>%"
+"0","  sjmisc::descr(show = c(""label"", ""range"", ""mean"", ""sd"", ""NA.prc"", ""n"")) %>%"
+"0","  kable(., digits = 2, ""markdown"", caption = ""Variables nivel 2"")"
