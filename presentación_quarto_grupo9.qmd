@@ -24,7 +24,7 @@ editor: source
 
 pacman::p_load(
   haven, car, corrplot, dplyr, stargazer, lme4, texreg,
-  reghelper, psych, sjPlot, ggplot2, ggeffects, lattice, kableExtra, sjmisc)
+  reghelper, psych, sjPlot, ggplot2, ggeffects, lattice, kableExtra, sjmisc, equatiomatic, knitr, htmltools, ggrepel, equatiomatic)
 options(scipen = 999)
 rm(list = ls())
 ```
@@ -96,29 +96,17 @@ $H_2b$: Los países donde las personas valoran más vivir en democracia presenta
 
 **Interacción entre niveles:**
 
-[Modelo teórico (hipótesis)](input/img/modelo_visual.png){fig-align="center" width="638" height="364"}
+$H3a$: El efecto positivo del género (a favor de las mujeres) sobre el respaldo a los principios de la democracia liberal es más intenso a medida que el país sea percibido más democrático.
+
+![Modelo teórico (hipótesis)](input/img/modelo_visual.png){fig-align="center" width="600" height="400"}
 
 # Metodología {data-background-color="#5f5758"}
 
 ## Datos
 
-Se utilizó la base de datos de la séptima ola del World Values Survey (2017–2022), compuesta por 88.207 casos en 66 países. La estructura jerárquica de la base (individuos anidados en países) permite el uso de modelos multinivel. Se eliminaron casos con datos faltantes y se construyó un índice compuesto que captura percepciones sobre tres principios fundamentales de la democracia liberal: soberanía popular, protección de derechos civiles e igualdad de género.
+Se utilizó la base de datos de la **séptima ola del World Values Survey (2017–2022)**, compuesta por **88.207 casos** en **66 países**. La estructura jerárquica de la base (individuos anidados en países) permite el uso de modelos multinivel. Se eliminaron casos con datos faltantes y se construyó un índice compuesto que captura percepciones sobre tres principios fundamentales de la democracia liberal: soberanía popular, protección de derechos civiles e igualdad de género.
 
 ## Variables
-
-(incluir tablas univariados por nivel)
-
-## Métodos
-
-... se estimó el siguiente modelo (hay que modificarlo):
-
-$$
-y_{ij} = \gamma_{00} + \gamma_{01} \text{ses} + \gamma_{02} \text{female} + \gamma_{03} \text{sector} + \gamma_{04} \text{mnses} + u_{0j} + r_{ij}
-$$
-
-# Resultados {data-background-color="#5f5758"}
-
-## Descriptivos
 
 ##### Tabla 1, Estadísticos descriptivos univariados nivel 1
 
@@ -132,6 +120,7 @@ datos_limpios %>% select(indice_dem, país, grp_econ, imp_dem, mujer) %>%
   ungroup() %>%
   sjmisc::descr(show = c("label","range", "mean", "sd", "NA.prc", "n"))%>%
   kable(digits =2, "markdown", caption = "Variables nivel 1")
+
 ```
 
 ##### Tabla 2, Estadisticos descriptivos univariados nivel 2
@@ -142,6 +131,87 @@ agg_datos %>% select(cuan_dem, prom_imp_dem) %>%
   sjmisc::descr(show = c("label", "range", "mean", "sd", "NA.prc", "n")) %>%
   kable(., digits = 2, "markdown", caption = "Variables nivel 2")
 ```
+
+## Métodos
+
+Se estimaron modelos multinivel con interceptos aleatorios y, posteriormente, con pendientes aleatorias para evaluar efectos contextuales. Se reporta el ICC, los coeficientes de regresión, errores estándar y varianzas explicadas. El análisis se realizó con software estadístico compatible con modelamiento multinivel, siguiendo recomendaciones metodológicas de Goldstein (1995) y Finch et al. (2014).
+
+Se estimaron un total de 5 modelos.
+
+------------------------------------------------------------------------
+
+## Modelo de nivel 1: incluye predictores individuales.
+
+$$
+y_{ij} =\beta_0 
++ \beta_1 \text{(grp_econij)}
++ \beta_2 \text{(mujerij)}
++ \beta_3 \text{(imp_demij)}
++ u{0j}
++ \epsilon{ij}
+$$
+
+## Modelo de nivel 2: incluye predictores contextuales.
+
+$$
+y_{ij} =\beta_0 
++ \beta_4 \text{(cuan_demj)}
++ \beta_5 \text{(prom_imp_demj)}
++ u{0j}
++ \epsilon{ij}
+$$
+
+## Modelo multinivel:
+
+$$
+y_{ij} =\beta_0 
++ \beta_1 \text{(grp_econij)}
++ \beta_2 \text{(mujerij)}
++ \beta_3 \text{(imp_demij)}
++ \beta_4 \text{(cuan_demj)}
++ \beta_5 \text{(prom_imp_demj)}
++ u{0j}
++ \epsilon{ij}
+$$
+
+## Modelo con pendiente aleatoria:
+
+:::: {style="font-size:85%"}
+::: {style="overflow-x: auto; white-space: nowrap;"}
+$$
+y_{ij} =\beta_0 
++ \beta_1 \text{(grp_econij)}
++ \beta_2 \text{(mujerij)}
++ \beta_3 \text{(imp_demij)}
++ \beta_4 \text{(imp_demij)}
++ \beta_5 \text{(imp_demij)}
++ u{0j}
++ r{ij}
+$$
+:::
+::::
+
+## Modelo de interacción:
+
+:::: {style="font-size:85%"}
+::: {style="overflow-x: auto; white-space: nowrap;"}
+$$
+\text{esc}_{ij}= \gamma_{00}
++ \gamma_{01}\,\text{female}
++ \gamma_{02}\,\text{nse_cmc}
++ \gamma_{03}\,\text{part_social_num}
++ \gamma_{04}\,\text{prop_empleo_gmc}
++ \gamma_{05}\,\text{n_escuelas_gmc}
++ u_{0\text{comuna}}
++ u_{1\text{comuna}}\,\text{nse_cmc}
++ r_{ij}
+$$
+:::
+::::
+
+# Resultados {data-background-color="#5f5758"}
+
+## Descriptivos
 
 ## Modelos
 
