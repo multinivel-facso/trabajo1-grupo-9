@@ -187,6 +187,39 @@ Yij = β₀ + β₁(grp_econij) + β₂(mujerij) + β₃(imp_demij)
 
 # Análisis y resultados preliminares
 
+## bivariados
+
+```{r echo=FALSE, warning=FALSE, message=FALSE, results='hide'  }
+dat_scat= datos %>% group_by(país) %>% select(cuan_dem, indice_dem) %>% na.omit() %>% summarise_all(mean)
+names(dat_scat)
+```
+# Gráfico 1, Relación de promedio de percepción sobre cuan democratico es un país con Índice de Percepción sobre Principios de la Democracia Liberal
+```{r  echo=FALSE, warning=FALSE, message=FALSE }
+sjPlot::plot_scatter(dat_scat, cuan_dem,indice_dem,
+            dot.labels = to_label(dat_scat$país),
+            fit.line = "lm",
+            show.ci = TRUE
+            )
+```
+
+
+```{r echo=FALSE, warning=FALSE, message=FALSE, results='hide'  }
+dat_scat= datos %>% group_by(país) %>% select(prom_imp_dem, indice_dem) %>% na.omit() %>% summarise_all(mean)
+names(dat_scat)
+```
+# Gráfico 2, Relación de promedio de importancia de vivir en un país democratico con Índice de Percepción sobre Principios de la Democracia Liberal
+```{r  echo=FALSE, warning=FALSE, message=FALSE }
+sjPlot::plot_scatter(dat_scat, prom_imp_dem,indice_dem,
+            dot.labels = to_label(dat_scat$país),
+            fit.line = "lm",
+            show.ci = TRUE
+            )
+```
+
+
+
+## Modelos
+
 ```{r  echo=FALSE, warning=FALSE, message=FALSE }
 results_0 <- lmer(indice_dem ~ 1 + (1 | país), data = datos)
 ICC  <-reghelper::ICC(results_0) 
@@ -321,7 +354,6 @@ kable(anova_tabla, caption = "Tabla de devianza: comparación de modelos") %>%
   kable_styling(full_width = F)
 
 ```
-
 
 El modelo con efectos aleatorios en las pendientes de la variable "Importancia atribuida a vivir en democracia", explica un 3% más la varianza de la variable dependiente que el modelo con pendientes fijas según el R cuadrado condicional. Respecto a las variables explicativas, se mantienen de forma similar la mayoría de los parámetros relevantes calculados por el modelo anterior, a excepción de la variable de “autopercepción de grupo socioeconómico”, que en este modelo tiene un valor p significativo. Sin embargo, su coeficiente de regresión es de -0,02, lo que es un efecto demasiado pequeño para ser considerado importante, aunque en la práctica denote un sentido contrario al supuesto en la hipótesis H1c, rechazándola. Esto indicaría que a medida que la gente se percibe en grupos socioeconómicos más altos, no presenta un mayor respaldo a los principios de la democracia liberal. Sin embargo, tampoco presenta un menor respaldo, de manera que la autopercepción del grupo socioeconómico no es influyente en el apoyo o rechazo de principios de la democracia liberal.
 

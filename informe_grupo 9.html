@@ -34,6 +34,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="informe_grupo 9_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="informe_grupo 9_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="informe_grupo 9_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="informe_grupo 9_files/libs/kePrint-0.0.1/kePrint.js"></script>
+
+<link href="informe_grupo 9_files/libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
 
 
 </head>
@@ -321,6 +325,35 @@ Yij: Apoyo a la democracia liberal (índice de Q243 + Q246 + Q249) del individuo
 </section>
 <section id="análisis-y-resultados-preliminares" class="level1">
 <h1>Análisis y resultados preliminares</h1>
+<section id="bivariados" class="level2">
+<h2 class="anchored" data-anchor-id="bivariados">bivariados</h2>
+</section>
+</section>
+<section id="gráfico-1-relación-de-promedio-de-percepción-sobre-cuan-democratico-es-un-país-con-índice-de-percepción-sobre-principios-de-la-democracia-liberal" class="level1">
+<h1>Gráfico 1, Relación de promedio de percepción sobre cuan democratico es un país con Índice de Percepción sobre Principios de la Democracia Liberal</h1>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="informe_grupo-9_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="gráfico-2-relación-de-promedio-de-importancia-de-vivir-en-un-país-democratico-con-índice-de-percepción-sobre-principios-de-la-democracia-liberal" class="level1">
+<h1>Gráfico 2, Relación de promedio de importancia de vivir en un país democratico con Índice de Percepción sobre Principios de la Democracia Liberal</h1>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="informe_grupo-9_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="modelos" class="level2">
+<h2 class="anchored" data-anchor-id="modelos">Modelos</h2>
 <section id="tabla-3-modelos-preliminares" class="level5">
 <h5 class="anchored" data-anchor-id="tabla-3-modelos-preliminares">Tabla 3, Modelos preliminares</h5>
 <div class="cell">
@@ -816,8 +849,55 @@ Yij: Apoyo a la democracia liberal (índice de Q243 + Q246 + Q249) del individuo
 <p>En consideración de lo anterior, en este modelo no hay evidencia suficiente para aceptar las hipótesis H1c y H2a, correspondientes a las variables restantes que no alcanzaron un valor “p” significativo, que son la “autopercepción de grupo económico” y la “percepción de cuán democratico es su país”. Por otro lado, respecto a la variable “mujer”, se observa un coeficiente de regresión de -0,13, lo que significa que las mujeres tienen en promedio -0,13 en el índice de percepción de valores de la democracia liberal respecto a los hombres. De esta forma, se rechaza la hipótesis H1a, en cuanto, contrario a lo supuesto, las mujeres presentan en promedio un menor respaldo a los principios de la democracia liberal que los hombres</p>
 <p>Finalmente, tanto la variable de “importancia de la democracia” que presenta un coeficiente de regresión de 1,08, como la variable “promedio de importancia de la democracia”, con un coeficiente de regresión de 1,11, permiten aceptar las hipótesis H1b y H2b respectivamente. Esto gracias a que se interpreta que por cada punto más marcado de “importancia de la democracia” el índice de percepción de principios de la democracia liberal aumenta en 1,08, mientras que por cada punto en promedio por país, aumenta en 1,11. De esta manera, se observa que a mayor importancia que se le atribuye a la democracia, más se apoyan sus principios liberales, tal como fue supuesto en las hipótesis. Sin embargo, que la variación entre el nivel individual y grupal de esta variable no sea muy considerable, sumado a que el error de la variable a nivel contextual es de 0,44, mientras que la de nivel individual es de 0,01, hacen que no sea seguro afirmar que esta variable sea de nivel contextual antes que individual. Es decir, la importancia atribuida a la democracia, pareciera ser algo que afecta a la percepción de los valores de la democracia liberal, más bien como un efecto al nivel de los individuos, antes que por la influencia del contexto al nivel de los países.</p>
 </section>
+</section>
 <section id="modelo-con-efectos-aleatorios" class="level2">
 <h2 class="anchored" data-anchor-id="modelo-con-efectos-aleatorios">Modelo con efectos aleatorios</h2>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table caption-top table-sm table-striped small" data-quarto-postprocess="true">
+<caption>Tabla de devianza: comparación de modelos</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">npar</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">AIC</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">BIC</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">logLik</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">deviance</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Chisq</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Df</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Pr(&gt;Chisq)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Combinado (centrado)</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">549423.9</td>
+<td style="text-align: right;">549499.0</td>
+<td style="text-align: right;">-274704.0</td>
+<td style="text-align: right;">549407.9</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Pendiente Aleatoria</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">547083.7</td>
+<td style="text-align: right;">547177.6</td>
+<td style="text-align: right;">-273531.9</td>
+<td style="text-align: right;">547063.7</td>
+<td style="text-align: right;">2344.214</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
 <p>El modelo con efectos aleatorios en las pendientes de la variable “Importancia atribuida a vivir en democracia”, explica un 3% más la varianza de la variable dependiente que el modelo con pendientes fijas según el R cuadrado condicional. Respecto a las variables explicativas, se mantienen de forma similar la mayoría de los parámetros relevantes calculados por el modelo anterior, a excepción de la variable de “autopercepción de grupo socioeconómico”, que en este modelo tiene un valor p significativo. Sin embargo, su coeficiente de regresión es de -0,02, lo que es un efecto demasiado pequeño para ser considerado importante, aunque en la práctica denote un sentido contrario al supuesto en la hipótesis H1c, rechazándola. Esto indicaría que a medida que la gente se percibe en grupos socioeconómicos más altos, no presenta un mayor respaldo a los principios de la democracia liberal. Sin embargo, tampoco presenta un menor respaldo, de manera que la autopercepción del grupo socioeconómico no es influyente en el apoyo o rechazo de principios de la democracia liberal.</p>
 <p>Por otro lado, se obtuvo un t11 de 0,20, lo que significa que hay una variación baja de las pendiente aleatoria entre países. Mientras tanto, el P0 de -0,84, indica que a mayor intercepto, las variables tienen menor pendiente. En el caso de la variable importancia de la democracia, esto indica que mientras mayor sea el valor del índice de percepción de valores de la democracia liberal cuando esta es 0, en cada grupo, menor será su efecto. Esto puede tomarse como que en grupos donde en promedio se tiene una alta valoración de los principios de la democracia liberal, las variables exógenas tienen baja incidencia.</p>
 <section id="gráfico-de-interceptos-aleatorios" class="level5">
@@ -840,7 +920,7 @@ Yij: Apoyo a la democracia liberal (índice de Q243 + Q246 + Q249) del individuo
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="informe_grupo-9_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="informe_grupo-9_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -852,7 +932,7 @@ Yij: Apoyo a la democracia liberal (índice de Q243 + Q246 + Q249) del individuo
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="informe_grupo-9_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="informe_grupo-9_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
