@@ -78,21 +78,17 @@ Aquí mis notas
 
 # Hipótesis:
 
-Nivel 1:
+## Nivel 1:
 
 $H_1a$: Las mujeres presentan un mayor respaldo a los principios de la democracia liberal que los hombres.
 
-
 $H_1b$: Las personas que valoran positivamente vivir en democracia presentan un mayor respaldo a los principios de la democracia liberal.
-
 
 $H_1c$: Las personas que se perciben en una mejor situación económica presentan un mayor respaldo a los principios de la democracia liberal.
 
-# Nivel 2
+## Nivel 2
 
 $H_2a$: Los países en los que la ciudadanía percibe que viven en una democracia presentan un mayor respaldo promedio a los principios de la democracia liberal.
-
-
 
 $H_2b$: Los países donde las personas valoran más vivir en democracia presentan un mayor respaldo promedio a los principios de la democracia liberal.
 
@@ -105,6 +101,8 @@ $H_2b$: Los países donde las personas valoran más vivir en democracia presenta
 # Metodología {data-background-color="#5f5758"}
 
 ## Datos
+
+Se utilizó la base de datos de la séptima ola del World Values Survey (2017–2022), compuesta por 88.207 casos en 66 países. La estructura jerárquica de la base (individuos anidados en países) permite el uso de modelos multinivel. Se eliminaron casos con datos faltantes y se construyó un índice compuesto que captura percepciones sobre tres principios fundamentales de la democracia liberal: soberanía popular, protección de derechos civiles e igualdad de género.
 
 ## Variables
 
