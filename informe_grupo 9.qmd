@@ -99,7 +99,7 @@ Por otro lado, las variables independientes contextuales (nivel 2) son las sigui
 
 pacman::p_load(
   haven, car, corrplot, dplyr, stargazer, lme4, texreg,
-  reghelper, psych, sjPlot, ggplot2, ggeffects, lattice, kableExtra, sjmisc, equatiomatic, knitr, htmltools)
+  reghelper, psych, sjPlot, ggplot2, ggeffects, lattice, kableExtra, sjmisc, equatiomatic, knitr, htmltools, ggrepel)
 options(scipen = 999)
 rm(list = ls())
 ```
@@ -193,7 +193,9 @@ Yij = β₀ + β₁(grp_econij) + β₂(mujerij) + β₃(imp_demij)
 dat_scat= datos %>% group_by(país) %>% select(cuan_dem, indice_dem) %>% na.omit() %>% summarise_all(mean)
 names(dat_scat)
 ```
+
 # Gráfico 1, Relación de promedio de percepción sobre cuan democratico es un país con Índice de Percepción sobre Principios de la Democracia Liberal
+
 ```{r  echo=FALSE, warning=FALSE, message=FALSE }
 sjPlot::plot_scatter(dat_scat, cuan_dem,indice_dem,
             dot.labels = to_label(dat_scat$país),
@@ -202,12 +204,13 @@ sjPlot::plot_scatter(dat_scat, cuan_dem,indice_dem,
             )
 ```
 
-
 ```{r echo=FALSE, warning=FALSE, message=FALSE, results='hide'  }
 dat_scat= datos %>% group_by(país) %>% select(prom_imp_dem, indice_dem) %>% na.omit() %>% summarise_all(mean)
 names(dat_scat)
 ```
+
 # Gráfico 2, Relación de promedio de importancia de vivir en un país democratico con Índice de Percepción sobre Principios de la Democracia Liberal
+
 ```{r  echo=FALSE, warning=FALSE, message=FALSE }
 sjPlot::plot_scatter(dat_scat, prom_imp_dem,indice_dem,
             dot.labels = to_label(dat_scat$país),
@@ -215,8 +218,6 @@ sjPlot::plot_scatter(dat_scat, prom_imp_dem,indice_dem,
             show.ci = TRUE
             )
 ```
-
-
 
 ## Modelos
 
@@ -398,9 +399,6 @@ plot(plt) +
   )
 
 ```
-
-
-
 
 # Interacción entre niveles
 
