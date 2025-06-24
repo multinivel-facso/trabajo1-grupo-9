@@ -314,7 +314,7 @@ anova(results_3_centrados, reg2_centrada) #deviance comparación de ajustes
 #
 
 #Modelo con interacciones entre niveles
-model_int=lmer(indice_dem ~1 + imp_dem_cmc + grp_econ_cmc + mujer*cuan_dem_gmc + prom_imp_dem_gmc + (1 + imp_dem_cmc |país), data= datos, REML=F)
+model_int=lmer(indice_dem ~1 + imp_dem_cmc + grp_econ_cmc + mujer*cuan_dem_gmc + prom_imp_dem_gmc + (1 + imp_dem_cmc + mujer |país), data= datos, REML=F)
 
 
 ```
@@ -359,6 +359,19 @@ El modelo con efectos aleatorios en las pendientes de la variable "Importancia a
 
 Por otro lado, se obtuvo un t11 de 0,20, lo que significa que hay una variación baja de las pendiente aleatoria entre países. Mientras tanto, el P0 de -0,84, indica que a mayor intercepto, las variables tienen menor pendiente. En el caso de la variable importancia de la democracia, esto indica que mientras mayor sea el valor del índice de percepción de valores de la democracia liberal cuando esta es 0, en cada grupo, menor será su efecto. Esto puede tomarse como que en grupos donde en promedio se tiene una alta valoración de los principios de la democracia liberal, las variables exógenas tienen baja incidencia.
 
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+
+reg2mujer_centrada <- lmer(indice_dem ~ 1 + imp_dem_cmc + grp_econ_cmc + mujer + cuan_dem_gmc + prom_imp_dem_gmc + (1 + mujer | país), data = datos, REML=F)
+
+anova_tabla2 <- anova(results_3_centrados, reg2_centrada, reg2mujer_centrada, model_int)
+
+rownames(anova_tabla2) <- c("Combinado (centrado)", "P.A. Imp_dem", "P.A. Mujer", "P.A. Imp_dem y Mujer")
+
+kable(anova_tabla2, caption = "Tabla de devianza: comparación de modelos") %>%
+  kable_styling(full_width = F)
+
+```
+
 ##### Gráfico de interceptos aleatorios
 
 ```{r figure1-Interceptos_aleatorios, echo=FALSE, warning=FALSE, message=FALSE }
@@ -366,6 +379,28 @@ ggplot(datos, aes(imp_dem, m1, color = país, group = país),
       main = "Interceptos aleatorios" ) + 
   geom_smooth(se = FALSE, method = lm) 
 ```
+
+```{r figure2-pendientes_aleatorios, echo=FALSE, warning=FALSE, message=FALSE }
+
+
+plt <- ggpredict(
+  reg2_centrada,
+  terms = c("imp_dem_cmc", "país [sample =9]"),
+  type  = "random"
+)
+
+# Mostrar gráfico
+plot(plt) +
+  labs(
+    title = "Variación por país del efecto de percepción de importancia de la democracia",
+    x = "Percepción de importancia de la democracia",
+    y = "Países"
+  )
+
+```
+
+
+
 
 # Interacción entre niveles
 
