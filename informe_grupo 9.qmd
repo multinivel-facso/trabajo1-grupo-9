@@ -311,7 +311,6 @@ reg2_centrada <- lmer(indice_dem ~ 1 + imp_dem_cmc + grp_econ_cmc + mujer + cuan
 #Modelo con interacciones entre niveles
 model_int=lmer(indice_dem ~1 + imp_dem_cmc + grp_econ_cmc + mujer*cuan_dem_gmc + prom_imp_dem_gmc + (1 +  mujer |país), data= datos, REML=F)
 
-
 ```
 
 ```{r echo=FALSE, warning=FALSE, message=FALSE}
@@ -340,15 +339,6 @@ Finalmente, tanto la variable de “importancia de la democracia” que presenta
 
 ## Modelo con efectos aleatorios
 
-```{r echo=FALSE, warning=FALSE, message=FALSE}
-anova_tabla <- anova(results_3_centrados, reg2_centrada)
-
-rownames(anova_tabla) <- c("Combinado (centrado)", "Pendiente Aleatoria")
-
-kable(anova_tabla, caption = "Tabla de devianza: comparación de modelos") %>%
-  kable_styling(full_width = F)
-
-```
 
 El modelo con efectos aleatorios en las pendientes de la variable "Importancia atribuida a vivir en democracia", explica un 3% más la varianza de la variable dependiente que el modelo con pendientes fijas según el R cuadrado condicional. Respecto a las variables explicativas, se mantienen de forma similar la mayoría de los parámetros relevantes calculados por el modelo anterior, a excepción de la variable de “autopercepción de grupo socioeconómico”, que en este modelo tiene un valor p significativo. Sin embargo, su coeficiente de regresión es de -0,02, lo que es un efecto demasiado pequeño para ser considerado importante, aunque en la práctica denote un sentido contrario al supuesto en la hipótesis H1c, rechazándola. Esto indicaría que a medida que la gente se percibe en grupos socioeconómicos más altos, no presenta un mayor respaldo a los principios de la democracia liberal. Sin embargo, tampoco presenta un menor respaldo, de manera que la autopercepción del grupo socioeconómico no es influyente en el apoyo o rechazo de principios de la democracia liberal.
 
@@ -363,7 +353,7 @@ anova_tabla2 <- anova(results_3_centrados, reg2_centrada)
 
 rownames(anova_tabla2) <- c("Combinado (centrado)", "P.A. Imp_dem")
 
-kable(anova_tabla2, caption = "Tabla de devianza 1: Comparación Pendiente Fija con P.A. Mujer") %>%
+kable(anova_tabla2, caption = "Tabla de devianza 1: Comparación Pendiente Fija con P.A. Imp_dem") %>%
   kable_styling(full_width = F)
 
 ```
@@ -404,7 +394,7 @@ plot(plt) +
   labs(
     title = "Variación por país del efecto de percepción de importancia de la democracia",
     x = "Percepción de importancia de la democracia",
-    y = "Países"
+    y = "Índice de percepción de valores de la democracia liberal"
   )
 
 ```
