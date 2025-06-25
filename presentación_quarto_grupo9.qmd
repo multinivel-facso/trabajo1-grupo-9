@@ -24,7 +24,7 @@ editor: source
 
 pacman::p_load(
   haven, car, corrplot, dplyr, stargazer, lme4, texreg,
-  reghelper, psych, sjPlot, ggplot2, ggeffects, lattice, kableExtra, sjmisc, equatiomatic, knitr, htmltools, ggrepel, equatiomatic)
+  reghelper, psych, sjPlot, ggplot2, ggeffects, lattice, kableExtra, sjmisc, equatiomatic, knitr, htmltools, ggrepel)
 options(scipen = 999)
 rm(list = ls())
 ```
@@ -64,11 +64,25 @@ Aquí mis notas
 
 # Introducción
 
--   \[problema, objeto de estudio\] Rendimiento en matemáticas decreciente y aumentan brechas por género
+-   Durante la última década, la democracia liberal ha enfrentado múltiples tensiones. Aunque se mantienen formalmente instituciones como elecciones libres o división de poderes, ha crecido la insatisfacción ciudadana con su funcionamiento (Wike, Silver & Castillo, 2019). Esta paradoja genera una pregunta clave: ¿realmente la ciudadanía sigue adhiriendo a los principios democráticos liberales?
 
--   \[factores asociados L1\] Nivel socioeconómico y género de estudiantes
+------------------------------------------------------------------------
 
--   \[factores asociados L2\] Nivel socioeconómico de la escuela y composición de género de las salas de clases.
+-   **Factores asociados L1:**
+
+    > Género (mujer), Autopercepción de grupo económico e Importancia de vivir en democracia
+
+-   **Factores asociados L2:**
+
+    > Promedio nacional de importancia atribuida a vivir en democracia y promedio nacional del índice de respaldo a los principios democráticos
+
+# Antecedentes
+
+-   Inglehart y Welzel (2005) sostienen que los valores de autoexpresión y autonomía individual son fundamentales para sostener regímenes democráticos. Estos valores florecen donde hay recursos asegurados y libertad cultural.
+
+-   Alexander y Welzel (2011) encontraron que las mujeres suelen mostrar mayor apoyo a la equidad y los derechos civiles. No obstante, su influencia concreta sobre el respaldo a la democracia liberal todavía es debatida.
+
+-   A nivel contextual, los climas democráticos nacionales —como la percepción general sobre si el país es democrático— refuerzan las disposiciones individuales (Welzel & Inglehart, 2005).
 
 ##  {data-background-color="#5f5758"}
 
@@ -94,7 +108,7 @@ $H_2b$: Los países donde las personas valoran más vivir en democracia presenta
 
 ------------------------------------------------------------------------
 
-**Interacción entre niveles:**
+**Interacción entre niveles**
 
 $H3a$: El efecto positivo del género (a favor de las mujeres) sobre el respaldo a los principios de la democracia liberal es más intenso a medida que el país sea percibido más democrático.
 
@@ -108,7 +122,7 @@ Se utilizó la base de datos de la **séptima ola del World Values Survey (2017�
 
 ## Variables
 
-##### Tabla 1, Estadísticos descriptivos univariados nivel 1
+##### Estadísticos descriptivos univariados nivel 1
 
 ```{r tbl-descriptivos-nivel1, echo=FALSE, warning=FALSE, message=FALSE}
 
@@ -123,7 +137,7 @@ datos_limpios %>% select(indice_dem, país, grp_econ, imp_dem, mujer) %>%
 
 ```
 
-##### Tabla 2, Estadisticos descriptivos univariados nivel 2
+##### Estadisticos descriptivos univariados nivel 2
 
 ```{r tbl-descriptivos-nivel2, echo=FALSE, warning=FALSE, message=FALSE }
 agg_datos <- datos %>% group_by(país) %>% summarise_all(mean) %>% as.data.frame()
@@ -211,16 +225,13 @@ $$
 
 # Resultados {data-background-color="#5f5758"}
 
-## Descriptivos
-
-## Modelos
-
 ```{r echo=FALSE, warning=FALSE, message=FALSE, results='hide'  }
 dat_scat= datos %>% group_by(país) %>% select(cuan_dem, indice_dem) %>% na.omit() %>% summarise_all(mean)
 names(dat_scat)
 ```
 
 ## Gráfico 1
+
 ### Relación de promedio de percepción sobre cuan democratico es un país con Índice de Percepción sobre Principios de la Democracia Liberal
 
 ```{r  echo=FALSE, warning=FALSE, message=FALSE }
@@ -237,6 +248,7 @@ names(dat_scat)
 ```
 
 ## Gráfico 2
+
 ### Relación de promedio de importancia de vivir en un país democratico con Índice de Percepción sobre Principios de la Democracia Liberal
 
 ```{r  echo=FALSE, warning=FALSE, message=FALSE }
@@ -313,14 +325,8 @@ reg2_centrada <- lmer(indice_dem ~ 1 + imp_dem_cmc + grp_econ_cmc + mujer + cuan
 
 ```
 
-## Tabla 3 
-### Modelos preliminares
+## Tabla
 
-```{r echo=FALSE, warning=FALSE, message=FALSE}
-tab_model(results_0, results_1, results_2, results_3, reg2, show.ci = FALSE, show.se = TRUE, dv.labels = c( "Nulo", "Var. Niv. 1","Var. Niv 2", "Combinado", "Pendiente Aleatoria"))
-```
-
-## Tabla 4 
 ### Modelos centrados e interacción
 
 ```{r echo=FALSE, warning=FALSE, message=FALSE, results='hide'}
@@ -336,15 +342,8 @@ results_3_centrados
 #multinivel pendiente aleatoria (centrada)
 reg2_centrada <- lmer(indice_dem ~ 1 + imp_dem_cmc + grp_econ_cmc + mujer + cuan_dem_gmc + prom_imp_dem_gmc + (1 + imp_dem_cmc | país), data = datos, REML=F)
 
-anova(results_3_centrados, reg2_centrada) #deviance comparación de ajustes
-
-#deviance
-#results_3_centrados = 549408
-#
-
 #Modelo con interacciones entre niveles
-model_int=lmer(indice_dem ~1 + imp_dem_cmc + grp_econ_cmc + mujer*cuan_dem_gmc + prom_imp_dem_gmc + (1 + imp_dem_cmc + mujer |país), data= datos, REML=F)
-
+model_int=lmer(indice_dem ~1 + imp_dem_cmc + grp_econ_cmc + mujer*cuan_dem_gmc + prom_imp_dem_gmc + (1 +  mujer |país), data= datos, REML=F)
 
 ```
 
@@ -352,15 +351,58 @@ model_int=lmer(indice_dem ~1 + imp_dem_cmc + grp_econ_cmc + mujer*cuan_dem_gmc +
 tab_model(results_0, results_1_centrado, results_2_centrado, results_3_centrados, reg2_centrada, model_int, show.ci = FALSE, show.se = TRUE, dv.labels = c( "Nulo", "Var. Niv. 1 (centrado)", "Var. Niv. 2 (centrado)", "Combinado (centrado)", "Pendiente Aleatoria (centrado)", "Interacción entre niveles"))
 ```
 
+# Tablas de Devianza {.scrollable-x .smaller}
 
-# Resultados {.scrollable-x .smaller}
+```{r echo=FALSE, warning=FALSE, message=FALSE}
 
-o mediante tablas
+anova_tabla2 <- anova(results_3_centrados, reg2_centrada)
+
+rownames(anova_tabla2) <- c("Combinado (centrado)", "P.A. Imp_dem")
+
+kable(anova_tabla2, caption = "Tabla de devianza 1: Comparación Pendiente Fija con P.A. Imp_dem") %>%
+  kable_styling(full_width = F)
+
+```
+
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+
+anova_tabla3 <- anova(results_3_centrados, model_int)
+
+rownames(anova_tabla3) <- c("Combinado (centrado)", "P.A. Mujer")
+
+kable(anova_tabla3, caption = "Tabla de devianza 2: Comparación Pendiente Fija con P.A. Mujer") %>%
+  kable_styling(full_width = F)
+
+```
+
+# Gráfico de interceptos aleatorios
+
+```{r figure1-Interceptos_aleatorios, echo=FALSE, warning=FALSE, message=FALSE }
+ggplot(datos, aes(imp_dem, m1, color = país, group = país),
+      main = "Interceptos aleatorios" ) + 
+  geom_smooth(se = FALSE, method = lm) 
+```
+
+```{r figure2-pendientes_aleatorios, echo=FALSE, warning=FALSE, message=FALSE }
 
 
+plt <- ggpredict(
+  reg2_centrada,
+  terms = c("imp_dem_cmc", "país [sample =9]"),
+  type  = "random"
+)
 
+# Mostrar gráfico
+plot(plt) +
+  labs(
+    title = "Variación por país del efecto de percepción de importancia de la democracia",
+    x = "Percepción de importancia de la democracia",
+    y = "Índice de percepción de valores de la democracia liberal"
+  )
 
-## Interacción entre niveles
+```
+
+# Interacción entre niveles
 
 ```{r echo=FALSE, warning=FALSE, message=FALSE}
 # grafico interacción
@@ -398,6 +440,10 @@ plot(estex.m23, which="cook",
      xlab="Cooks Distance",
      ylab="país")
 ```
+
+## Modelo teórico con resultados
+
+![![](images/clipboard-1177848958.png)](input/img/modelo_teórico_resultados.png){width="494"}
 
 # Conclusiones {data-background-color="black"}
 
