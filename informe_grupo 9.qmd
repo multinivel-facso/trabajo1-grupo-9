@@ -308,14 +308,8 @@ results_3_centrados
 #multinivel pendiente aleatoria (centrada)
 reg2_centrada <- lmer(indice_dem ~ 1 + imp_dem_cmc + grp_econ_cmc + mujer + cuan_dem_gmc + prom_imp_dem_gmc + (1 + imp_dem_cmc | país), data = datos, REML=F)
 
-anova(results_3_centrados, reg2_centrada) #deviance comparación de ajustes
-
-#deviance
-#results_3_centrados = 549408
-#
-
 #Modelo con interacciones entre niveles
-model_int=lmer(indice_dem ~1 + imp_dem_cmc + grp_econ_cmc + mujer*cuan_dem_gmc + prom_imp_dem_gmc + (1 + imp_dem_cmc + mujer |país), data= datos, REML=F)
+model_int=lmer(indice_dem ~1 + imp_dem_cmc + grp_econ_cmc + mujer*cuan_dem_gmc + prom_imp_dem_gmc + (1 +  mujer |país), data= datos, REML=F)
 
 
 ```
@@ -360,18 +354,33 @@ El modelo con efectos aleatorios en las pendientes de la variable "Importancia a
 
 Por otro lado, se obtuvo un t11 de 0,20, lo que significa que hay una variación baja de las pendiente aleatoria entre países. Mientras tanto, el P0 de -0,84, indica que a mayor intercepto, las variables tienen menor pendiente. En el caso de la variable importancia de la democracia, esto indica que mientras mayor sea el valor del índice de percepción de valores de la democracia liberal cuando esta es 0, en cada grupo, menor será su efecto. Esto puede tomarse como que en grupos donde en promedio se tiene una alta valoración de los principios de la democracia liberal, las variables exógenas tienen baja incidencia.
 
+
+
+
 ```{r echo=FALSE, warning=FALSE, message=FALSE}
 
-reg2mujer_centrada <- lmer(indice_dem ~ 1 + imp_dem_cmc + grp_econ_cmc + mujer + cuan_dem_gmc + prom_imp_dem_gmc + (1 + mujer | país), data = datos, REML=F)
+anova_tabla2 <- anova(results_3_centrados, reg2_centrada)
 
-anova_tabla2 <- anova(results_3_centrados, reg2_centrada, reg2mujer_centrada, model_int)
+rownames(anova_tabla2) <- c("Combinado (centrado)", "P.A. Imp_dem")
 
-rownames(anova_tabla2) <- c("Combinado (centrado)", "P.A. Imp_dem", "P.A. Mujer", "P.A. Imp_dem y Mujer")
-
-kable(anova_tabla2, caption = "Tabla de devianza: comparación de modelos") %>%
+kable(anova_tabla2, caption = "Tabla de devianza 1: Comparación Pendiente Fija con P.A. Mujer") %>%
   kable_styling(full_width = F)
 
 ```
+
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+
+anova_tabla3 <- anova(results_3_centrados, model_int)
+
+rownames(anova_tabla3) <- c("Combinado (centrado)", "P.A. Mujer")
+
+kable(anova_tabla3, caption = "Tabla de devianza 2: Comparación Pendiente Fija con P.A. Mujer") %>%
+  kable_styling(full_width = F)
+
+```
+
+
+
 
 ##### Gráfico de interceptos aleatorios
 
