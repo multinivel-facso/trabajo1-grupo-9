@@ -215,22 +215,189 @@ $$
 
 ## Modelos
 
-Los resultados de los modelos de regresión pueden ser presentados en un coefplot
+```{r echo=FALSE, warning=FALSE, message=FALSE, results='hide'  }
+dat_scat= datos %>% group_by(país) %>% select(cuan_dem, indice_dem) %>% na.omit() %>% summarise_all(mean)
+names(dat_scat)
+```
 
-## Resultados {.scrollable-x .smaller}
+## Gráfico 1
+### Relación de promedio de percepción sobre cuan democratico es un país con Índice de Percepción sobre Principios de la Democracia Liberal
+
+```{r  echo=FALSE, warning=FALSE, message=FALSE }
+sjPlot::plot_scatter(dat_scat, cuan_dem,indice_dem,
+            dot.labels = to_label(dat_scat$país),
+            fit.line = "lm",
+            show.ci = TRUE
+            )
+```
+
+```{r echo=FALSE, warning=FALSE, message=FALSE, results='hide'  }
+dat_scat= datos %>% group_by(país) %>% select(prom_imp_dem, indice_dem) %>% na.omit() %>% summarise_all(mean)
+names(dat_scat)
+```
+
+## Gráfico 2
+### Relación de promedio de importancia de vivir en un país democratico con Índice de Percepción sobre Principios de la Democracia Liberal
+
+```{r  echo=FALSE, warning=FALSE, message=FALSE }
+sjPlot::plot_scatter(dat_scat, prom_imp_dem,indice_dem,
+            dot.labels = to_label(dat_scat$país),
+            fit.line = "lm",
+            show.ci = TRUE
+            )
+```
+
+```{r  echo=FALSE, warning=FALSE, message=FALSE }
+results_0 <- lmer(indice_dem ~ 1 + (1 | país), data = datos)
+ICC  <-reghelper::ICC(results_0) 
+
+results_1 <- lmer(indice_dem ~ 1 + grp_econ + mujer + imp_dem + (1 | país), data = datos)
+results_2 <- lmer(indice_dem ~ 1 + cuan_dem + prom_imp_dem + (1 | país), data = datos)
+results_3 <- lmer(indice_dem ~ 1 + grp_econ + mujer + imp_dem + cuan_dem + prom_imp_dem + (1 | país), data = datos)
+
+reg_ind <- lm(indice_dem ~ grp_econ + mujer + imp_dem + cuan_dem + prom_imp_dem, data = datos)
+reg_agg <- lm(indice_dem ~ grp_econ + mujer + imp_dem + cuan_dem + prom_imp_dem, data = agg_datos)
+```
+
+```{r echo=FALSE, warning=FALSE, message=FALSE }
+reg_0 <- lmer(indice_dem ~ 1 + (1 | país), data = datos)
+reg_1 <- lmer(indice_dem ~ 1 + grp_econ + mujer + imp_dem + cuan_dem + prom_imp_dem + (1 | país), data = datos)
+datos$m1 <- predict(reg_1)
+
+datos$imp_dem <- as.numeric(datos$imp_dem)
+datos$país <- as.factor(datos$país)
+
+reg2 <- lmer(indice_dem ~ 1 + imp_dem + grp_econ + mujer + cuan_dem + prom_imp_dem + (1 + imp_dem | país), data = datos)
+
+
+graf1 <- ggpredict(reg_1, terms = c("imp_dem","país [sample=9]"), type="random")
+
+graf2=ggpredict(reg2, terms = c("imp_dem","país [sample=9]"), type="random")
+
+
+
+```
+
+```{r echo=FALSE, warning=FALSE, message=FALSE, results='hide'}
+datos <- datos %>%                 # CMC (Centering within cluster) nivel 1
+  group_by(país) %>%
+  mutate(
+    mean_grp_econ_pais = mean(grp_econ, na.rm = TRUE),
+    grp_econ_cmc         =  grp_econ - mean_grp_econ_pais,
+    mean_imp_dem_pais = mean(imp_dem, na.rm = TRUE),
+    imp_dem_cmc         =  imp_dem - mean_imp_dem_pais
+    
+    
+  ) %>% ungroup() %>%                        # GMC (Grand mean centering )nivel 2
+  mutate(
+   cuan_dem_gmc = cuan_dem - mean(cuan_dem, na.rm = TRUE),
+  prom_imp_dem_gmc  = prom_imp_dem  - mean(prom_imp_dem,  na.rm = TRUE)
+  )
+
+# combinada con centrado
+results_3_centrados <- lmer(indice_dem ~ 1 + grp_econ_cmc + mujer + imp_dem_cmc + cuan_dem_gmc + prom_imp_dem_gmc + (1 | país), data = datos)
+
+# individual centrada
+
+results_1_centrado <- lmer(indice_dem ~ 1 + grp_econ_cmc + mujer + imp_dem_cmc + (1 | país), data = datos)
+
+
+# agregada centrada
+
+
+results_2_centrado <- lmer(indice_dem ~ 1 + cuan_dem_gmc + prom_imp_dem_gmc + (1 | país), data = datos)
+
+# pendiente aleatoria centrada
+
+reg2_centrada <- lmer(indice_dem ~ 1 + imp_dem_cmc + grp_econ_cmc + mujer + cuan_dem_gmc + prom_imp_dem_gmc + (1 + imp_dem_cmc | país), data = datos)
+
+```
+
+## Tabla 3 
+### Modelos preliminares
+
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+tab_model(results_0, results_1, results_2, results_3, reg2, show.ci = FALSE, show.se = TRUE, dv.labels = c( "Nulo", "Var. Niv. 1","Var. Niv 2", "Combinado", "Pendiente Aleatoria"))
+```
+
+## Tabla 4 
+### Modelos centrados e interacción
+
+```{r echo=FALSE, warning=FALSE, message=FALSE, results='hide'}
+# interacción entre niveles
+
+pacman::p_load(
+  haven, car, corrplot, dplyr, stargazer, lme4, texreg,
+  reghelper, psych, sjPlot, ggplot2, ggeffects, lattice, kableExtra, sjmisc)
+
+# multinivel pendiente fija (centrada)
+results_3_centrados 
+
+#multinivel pendiente aleatoria (centrada)
+reg2_centrada <- lmer(indice_dem ~ 1 + imp_dem_cmc + grp_econ_cmc + mujer + cuan_dem_gmc + prom_imp_dem_gmc + (1 + imp_dem_cmc | país), data = datos, REML=F)
+
+anova(results_3_centrados, reg2_centrada) #deviance comparación de ajustes
+
+#deviance
+#results_3_centrados = 549408
+#
+
+#Modelo con interacciones entre niveles
+model_int=lmer(indice_dem ~1 + imp_dem_cmc + grp_econ_cmc + mujer*cuan_dem_gmc + prom_imp_dem_gmc + (1 + imp_dem_cmc + mujer |país), data= datos, REML=F)
+
+
+```
+
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+tab_model(results_0, results_1_centrado, results_2_centrado, results_3_centrados, reg2_centrada, model_int, show.ci = FALSE, show.se = TRUE, dv.labels = c( "Nulo", "Var. Niv. 1 (centrado)", "Var. Niv. 2 (centrado)", "Combinado (centrado)", "Pendiente Aleatoria (centrado)", "Interacción entre niveles"))
+```
+
+
+# Resultados {.scrollable-x .smaller}
 
 o mediante tablas
 
-## Interacción
 
-::::: columns
-::: {.column width="70%"}
-:::
 
-::: {.column width="30%"}
-La interacción muestra que...
-:::
-:::::
+
+## Interacción entre niveles
+
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+# grafico interacción
+plot_model(model_int, type = "int")
+```
+
+## Casos influyentes
+
+```{r echo=FALSE, warning=FALSE, message=FALSE, results='hide'}
+# Casos influyentes
+
+pacman::p_load(influence.ME,
+               lattice, # dotplot
+               dplyr,
+               texreg,
+               stargazer,
+               tidyr
+)
+
+
+datos <- within(datos, país <- unclass(país))
+
+estex.m23 <- influence(results_3_centrados, "país") 
+
+cooks.distance(estex.m23, sort = TRUE)
+4/66 # cut point
+
+sigtest(estex.m23, test=-1.96) # no tenemos casos influyentes
+
+```
+
+```{r echo=FALSE, warning=FALSE, message=FALSE }
+plot(estex.m23, which="cook",
+     cutoff=.06, sort=TRUE,
+     xlab="Cooks Distance",
+     ylab="país")
+```
 
 # Conclusiones {data-background-color="black"}
 
