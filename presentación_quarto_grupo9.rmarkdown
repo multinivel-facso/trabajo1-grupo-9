@@ -15,7 +15,11 @@ format:
 editor: source
 ---
 
+
+
 # 
+
+
 
 ```{r librerias, echo=FALSE, warning=FALSE, message=FALSE, collapse=TRUE}
 
@@ -34,6 +38,8 @@ rm(list = ls())
 load(file="procesamiento/data/data.RData")
 
 ```
+
+
 
 :::::: columns
 ::: {.column width="20%"}
@@ -128,6 +134,8 @@ Se utilizó la base de datos de la **séptima ola del World Values Survey (2017�
 
 ##### Estadísticos descriptivos univariados nivel 1
 
+
+
 ```{r tbl-descriptivos-nivel1, echo=FALSE, warning=FALSE, message=FALSE}
 
 datos_limpios <- datos %>%
@@ -141,7 +149,11 @@ datos_limpios %>% select(indice_dem, país, grp_econ, imp_dem, mujer) %>%
 
 ```
 
+
+
 ##### Estadisticos descriptivos univariados nivel 2
+
+
 
 ```{r tbl-descriptivos-nivel2, echo=FALSE, warning=FALSE, message=FALSE }
 agg_datos <- datos %>% group_by(país) %>% summarise_all(mean) %>% as.data.frame()
@@ -149,6 +161,8 @@ agg_datos %>% select(cuan_dem, prom_imp_dem) %>%
   sjmisc::descr(show = c("label", "range", "mean", "sd", "NA.prc", "n")) %>%
   kable(., digits = 2, "markdown", caption = "Variables nivel 2")
 ```
+
+
 
 ## Métodos
 
@@ -231,14 +245,20 @@ $$
 
 # Resultados {data-background-color="#5f5758"}
 
+
+
 ```{r echo=FALSE, warning=FALSE, message=FALSE, results='hide'  }
 dat_scat= datos %>% group_by(país) %>% select(cuan_dem, indice_dem) %>% na.omit() %>% summarise_all(mean)
 names(dat_scat)
 ```
 
+
+
 ## Gráfico 1
 
 ### Relación de promedio de percepción sobre cuan democratico es un país con Índice de Percepción sobre Principios de la Democracia Liberal
+
+
 
 ```{r  echo=FALSE, warning=FALSE, message=FALSE }
 sjPlot::plot_scatter(dat_scat, cuan_dem,indice_dem,
@@ -253,9 +273,13 @@ dat_scat= datos %>% group_by(país) %>% select(prom_imp_dem, indice_dem) %>% na.
 names(dat_scat)
 ```
 
+
+
 ## Gráfico 2
 
 ### Relación de promedio de importancia de vivir en un país democratico con Índice de Percepción sobre Principios de la Democracia Liberal
+
+
 
 ```{r  echo=FALSE, warning=FALSE, message=FALSE }
 sjPlot::plot_scatter(dat_scat, prom_imp_dem,indice_dem,
@@ -331,7 +355,11 @@ reg2_centrada <- lmer(indice_dem ~ 1 + imp_dem_cmc + grp_econ_cmc + mujer + cuan
 
 ```
 
+
+
 ## Modelos centrados e interacción
+
+
 
 ```{r echo=FALSE, warning=FALSE, message=FALSE, results='hide'}
 # interacción entre niveles
@@ -355,7 +383,11 @@ model_int=lmer(indice_dem ~1 + imp_dem_cmc + grp_econ_cmc + mujer*cuan_dem_gmc +
 tab_model(results_0, results_1_centrado, results_2_centrado, results_3_centrados, reg2_centrada, model_int, show.ci = FALSE, show.se = TRUE, dv.labels = c( "Nulo", "Var. Niv. 1 (centrado)", "Var. Niv. 2 (centrado)", "Combinado (centrado)", "Pendiente Aleatoria (centrado)", "Interacción entre niveles"))
 ```
 
+
+
 ## Tablas de Devianza {.scrollable-x .smaller}
+
+
 
 ```{r echo=FALSE, warning=FALSE, message=FALSE}
 
@@ -379,7 +411,11 @@ kable(anova_tabla3, caption = "Tabla de devianza 2: Comparación Pendiente Fija 
 
 ```
 
+
+
 ## Gráfico de interceptos aleatorios
+
+
 
 ```{r figure1-Interceptos_aleatorios, echo=FALSE, warning=FALSE, message=FALSE }
 ggplot(datos, aes(imp_dem, m1, color = país, group = país),
@@ -406,14 +442,22 @@ plot(plt) +
 
 ```
 
+
+
 ## Interacción entre niveles
+
+
 
 ```{r echo=FALSE, warning=FALSE, message=FALSE}
 # grafico interacción
 plot_model(model_int, type = "int")
 ```
 
+
+
 ## Casos influyentes
+
+
 
 ```{r echo=FALSE, warning=FALSE, message=FALSE, results='hide'}
 # Casos influyentes
@@ -444,6 +488,8 @@ plot(estex.m23, which="cook",
      xlab="Cooks Distance",
      ylab="país")
 ```
+
+
 
 ## Modelo teórico con resultados
 
@@ -498,3 +544,4 @@ Offe, C. (2011). Crisis and innovation of liberal democracy: Can deliberation be
 Serret, E. (2004). Género y democracia. Revista Venezolana de Estudios de la Mujer, 9(21), 35–47. https://www.redalyc.org/pdf/315/31502103.pdf
 
 Wike, R., Silver, L., & Castillo, A. (2019). Many across the globe are dissatisfied with how democracy is working. Pew Research Center. https://www.pewresearch.org/global/2019/04/29/many-across-the-globe-are-dissatisfied-with-how-democracy-is-working/
+
