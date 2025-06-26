@@ -443,6 +443,28 @@ plot(estex.m23, which="cook",
 
 # Conclusiones
 
+## Se rechaza: 
+
+Nivel 1:
+
+1) H0-1a →  No existen diferencias significativas en el respaldo a los principios de la democracia liberal entre hombres y mujeres.
+
+2) H0-1c → Valorar positivamente vivir en democracia no se asocia con un mayor respaldo a los principios de la democracia liberal. 
+
+Nivel 2:
+
+1) H0-2b → La valoración promedio de vivir en democracia no se asocia con un mayor respaldo a los principios de la democracia liberal.
+
+## Se acepta:
+
+Nivel 1:
+
+1) $H_1c$: Las personas que valoran positivamente vivir en democracia presentan un mayor respaldo a los principios de la democracia liberal.
+
+Nivel 2:
+
+1) $H_2b$: Los países donde las personas valoran más vivir en democracia presentan un mayor respaldo promedio a los principios de la democracia liberal.
+
 ## Observaciones:
 
 1)  El efecto mujer es relevante, pero varía según el contexto democrático.
