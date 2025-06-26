@@ -70,7 +70,7 @@ Aquí mis notas
 
 -   **Variable Independiente:**
 
-    > Índice de Percepción sobre Principios de Democracia Liberal (0-30)
+    > Índice de Adhesión a Principios Democráticos Liberales (0-30)
 
 -   **Variables asociadas Nivel 1:**
 
@@ -78,11 +78,11 @@ Aquí mis notas
 
 -   **Variables asociadas Nivel 2:**
 
-    > Promedio nacional de importancia atribuida a vivir en democracia y promedio nacional del índice de respaldo a los principios democráticos
+    > Promedio nacional de importancia atribuida a vivir en democracia y promedio nacional del Índice de Adhesión a Principios Democráticos Liberales
 
 # Antecedentes
 
--   Inglehart y Welzel (2005a; 2005b) sostienen que los valores de autoexpresión y autonomía individual son fundamentales para el sostenimiento de los regímenes democráticos, ya que se fortalecen en contextos donde los recursos materiales están asegurados y existe una cultura que promueve la libertad individual. Además, plantean que los climas democráticos nacionales —como la percepción colectiva de vivir en una democracia— refuerzan estas disposiciones individuales, articulando así una dinámica entre condiciones estructurales y orientaciones subjetivas que favorece el respaldo a los principios liberales.
+-   Inglehart y Welzel (2005a; 2005b) argumentan que los valores de autoexpresión y autonomía, fortalecidos por el bienestar material y la libertad cultural, son clave para sostener la democracia. Estos valores, además, se ven reforzados por climas democráticos nacionales, articulando una relación entre contexto estructural y disposiciones individuales.
 
 -   Alexander y Welzel (2011) encontraron que las mujeres suelen mostrar mayor apoyo a la equidad y los derechos civiles. No obstante, su influencia concreta sobre el respaldo a la democracia liberal todavía es debatida.
 
@@ -236,7 +236,7 @@ names(dat_scat)
 
 ## Gráfico 1
 
-### Relación de promedio de percepción sobre cuan democratico es un país con Índice de Percepción sobre Principios de la Democracia Liberal
+### Relación de promedio de percepción sobre cuan democratico es un país con Índice de Adhesión a Principios Democráticos Liberalesl
 
 ```{r  echo=FALSE, warning=FALSE, message=FALSE }
 sjPlot::plot_scatter(dat_scat, cuan_dem,indice_dem,
@@ -253,7 +253,7 @@ names(dat_scat)
 
 ## Gráfico 2
 
-### Relación de promedio de importancia de vivir en un país democratico con Índice de Percepción sobre Principios de la Democracia Liberal
+### Relación de promedio de importancia de vivir en un país democratico con Índice de Adhesión a Principios Democráticos Liberales
 
 ```{r  echo=FALSE, warning=FALSE, message=FALSE }
 sjPlot::plot_scatter(dat_scat, prom_imp_dem,indice_dem,
@@ -393,7 +393,7 @@ plot(plt) +
   labs(
     title = "Variación por país del efecto de percepción de importancia de la democracia",
     x = "Percepción de importancia de la democracia",
-    y = "Índice de percepción de valores de la democracia liberal"
+    y = "Índice de Adhesión a Principios Democráticos Liberales"
   )
 
 ```
