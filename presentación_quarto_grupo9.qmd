@@ -68,7 +68,7 @@ Aquí mis notas
 
 ------------------------------------------------------------------------
 
--   **Variable Independiente:**
+-   **Variable dependiente:**
 
     > Índice de Adhesión a Principios Democráticos Liberales (0-30)
 
