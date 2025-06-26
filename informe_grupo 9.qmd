@@ -437,22 +437,34 @@ Preliminarmente, los hallazgos indican una varianza significativa entre países 
 
 # Referencias bibliográficas
 
+Alexander, A. C., & Welzel, C. (2011). Empowering women: The role of emancipative beliefs. European Sociological Review, 27(3), 364–384. https://doi.org/10.1093/esr/jcq012
+
+Almond, G. A., & Verba, S. (1963). The Civic Culture: Political Attitudes and Democracy in Five Nations. Princeton University Press.
+
 Ariely, G., & Davidov, E. (2011). Can we rate public support for democracy in a comparable way? Social Indicators Research, 104(2), 271–286. https://doi.org/10.1007/s11205-010-9693-5
 
-Bellino, M. J. (2017).Democracia liberal y democracia participativa: una tensión no resuelta. Revista LyE, (25), 1–20. http://revistas.derecho.uba.ar/index.php/revistalye/article/view/1037
+Bellino, M. J. (2017). Democracia liberal y democracia participativa: una tensión no resuelta. Revista LyE, (25), 1–20. http://revistas.derecho.uba.ar/index.php/revistalye/article/view/1037
+
+Castro Domingo, P. (2011). Cultura política: una propuesta socio-antropológica de la construcción de sentido en la política. Región y Sociedad, 23(50), 215–247. http://www.redalyc.org/articulo.oa?id=10218443009
 
 Córdoba Gómez, M. (2008). Democracia liberal y democracia participativa: una tensión no resuelta. Andamios, 5(10), 9–32. https://www.scielo.org.mx/scielo.php?script=sci_arttext&pid=S1870-0063200800030000
 
 Finch, W. H., Bolin, J. E., & Kelley, K. (2014). Multilevel modeling using R. CRC Press. https://doi.org/10.1201/b16042
 
-Goldstein, H. (1995). Multilevel statistical models (2nd ed.).
+Franetovic, G., & Castillo, J.-C. (2022). Preferences for income redistribution in unequal contexts: Changes in Latin America between 2008 and 2018. Frontiers in Sociology, 7, 806458. https://doi.org/10.3389/fsoc.2022.806458
 
-Edward Arnold. Kong, M. (2024). Individual Perspectives on Liberal Democracy: Insights from World Values Survey. International Journal of High School Research, 6(4), 45–60. https://doi.org/10.36838/v6i4.5
+Goldstein, H. (1995). Multilevel statistical models (2nd ed.). Edward Arnold.
+
+Inglehart, R., & Welzel, C. (2005a). Modernization, cultural change, and democracy: The human development sequence. Cambridge University Press.
+
+Inglehart, R., & Welzel, C. (2005b). Liberalism, postmaterialism, and the growth of freedom. International Review of Sociology, 15(1), 81–108. https://doi.org/10.1080/03906700500038579
+
+Kong, M. (2024). Individual Perspectives on Liberal Democracy: Insights from World Values Survey. International Journal of High School Research, 6(4), 45–60. https://doi.org/10.36838/v6i4.5
 
 Lee, S. K. (2024). Inequality and the Eroding Base of Liberal Democracy. Social Science Research, 113, 103087. https://doi.org/10.1016/j.ssresearch.2024.103087
 
-Offe, C. (2011). Crisis and innovation of liberal democracy: Can deliberation be institutionalised? Czech Sociological Review, 47(3), 447–472. Our World in Data. (2024).
+Offe, C. (2011). Crisis and innovation of liberal democracy: Can deliberation be institutionalised? Czech Sociological Review, 47(3), 447–472. Our World in Data. (2024). Liberal Democracy Index – V-Dem Central Estimate, Population-Weighted. OurWorldInData.org. https://ourworldindata.org/grapher/liberal-democracy-index
 
-Liberal Democracy Index – V-Dem Central Estimate, Population-Weighted. OurWorldInData.org. https://ourworldindata.org/grapher/liberal-democracy-index Serret, E. (2004). Género y democracia. Revista Venezolana de Estudios de la Mujer, 9(21), 35–47. https://www.redalyc.org/pdf/315/31502103.pdf
+Serret, E. (2004). Género y democracia. Revista Venezolana de Estudios de la Mujer, 9(21), 35–47. https://www.redalyc.org/pdf/315/31502103.pdf
 
 Wike, R., Silver, L., & Castillo, A. (2019). Many across the globe are dissatisfied with how democracy is working. Pew Research Center. https://www.pewresearch.org/global/2019/04/29/many-across-the-globe-are-dissatisfied-with-how-democracy-is-working/

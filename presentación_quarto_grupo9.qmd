@@ -82,11 +82,9 @@ Aquí mis notas
 
 # Antecedentes
 
--   Inglehart y Welzel (2005) sostienen que los valores de autoexpresión y autonomía individual son fundamentales para sostener regímenes democráticos. Estos valores florecen donde hay recursos asegurados y libertad cultural.
+-   Inglehart y Welzel (2005a; 2005b) sostienen que los valores de autoexpresión y autonomía individual son fundamentales para el sostenimiento de los regímenes democráticos, ya que se fortalecen en contextos donde los recursos materiales están asegurados y existe una cultura que promueve la libertad individual. Además, plantean que los climas democráticos nacionales —como la percepción colectiva de vivir en una democracia— refuerzan estas disposiciones individuales, articulando así una dinámica entre condiciones estructurales y orientaciones subjetivas que favorece el respaldo a los principios liberales.
 
 -   Alexander y Welzel (2011) encontraron que las mujeres suelen mostrar mayor apoyo a la equidad y los derechos civiles. No obstante, su influencia concreta sobre el respaldo a la democracia liberal todavía es debatida.
-
--   A nivel contextual, los climas democráticos nacionales —como la percepción general sobre si el país es democrático— refuerzan las disposiciones individuales (Welzel & Inglehart, 2005).
 
 ##  {data-background-color="#5f5758"}
 
