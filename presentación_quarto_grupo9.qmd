@@ -447,9 +447,9 @@ plot(estex.m23, which="cook",
 
 1)  El efecto mujer es relevante, pero varía según el contexto democrático.
 
-2)  P0 de -0,84: A mayor percepción promedio de valores democráticos, menor incidencia de variables exógenas.
+2)  P01 de -0,84: A mayor percepción promedio de valores democráticos, menor incidencia de variables exógenas.
 
-3)  Beta prom_imp_dem llama la atención que es mayor en su forma individual imp_dem, lo que indicaría que la percepción del contexto es más influyente que la individual.
+3)  LLama la atención que el coeficiente de prom_imp_dem  es mayor que su forma individual imp_dem, lo que indicaría que la percepción del contexto es más influyente que la individual.
 
 ## Limitaciones:
 
