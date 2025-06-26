@@ -377,13 +377,7 @@ kable(anova_tabla3, caption = "Tabla de devianza 2: Comparación Pendiente Fija 
 
 ```
 
-## Gráfico de interceptos aleatorios
-
-```{r figure1-Interceptos_aleatorios, echo=FALSE, warning=FALSE, message=FALSE }
-ggplot(datos, aes(imp_dem, m1, color = país, group = país),
-      main = "Interceptos aleatorios" ) + 
-  geom_smooth(se = FALSE, method = lm) 
-```
+## Gráfico de pendientes aleatorias
 
 ```{r figure2-pendientes_aleatorios, echo=FALSE, warning=FALSE, message=FALSE }
 
