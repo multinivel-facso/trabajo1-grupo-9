@@ -64,7 +64,7 @@ Aquí mis notas
 
 # Introducción
 
--   Durante la última década, la democracia liberal ha enfrentado múltiples tensiones. Aunque se mantienen formalmente instituciones como elecciones libres o división de poderes, ha crecido la insatisfacción ciudadana con su funcionamiento (Wike, Silver & Castillo, 2019). Esta paradoja genera una pregunta clave: ¿realmente la ciudadanía sigue adhiriendo a los principios democráticos liberales?
+-   Durante la última década, la democracia liberal ha enfrentado múltiples tensiones. Aunque se mantienen formalmente prácticas como elecciones libres o división de poderes, ha crecido la insatisfacción ciudadana con su funcionamiento (Wike, Silver & Castillo, 2019). Esta paradoja genera una pregunta clave: ¿realmente la ciudadanía sigue adhiriendo a los principios democráticos liberales?
 
 ------------------------------------------------------------------------
 
@@ -114,7 +114,7 @@ $H_2b$: Los países donde las personas valoran más vivir en democracia presenta
 
 $H3a$: El efecto positivo del género (a favor de las mujeres) sobre el respaldo a los principios de la democracia liberal es más intenso a medida que el país sea percibido más democrático.
 
-![Modelo teórico (hipótesis)](input/img/modelo_visual.png){fig-align="center" width="600" height="400"}
+![Modelo teórico (hipótesis)](input/img/modelo_visual.png){fig-align="center"}
 
 # Metodología {data-background-color="#5f5758"}
 
@@ -443,35 +443,33 @@ plot(estex.m23, which="cook",
 
 # Conclusiones
 
-## Se rechaza: 
+## Se rechaza:
 
 Nivel 1:
 
-1) H0-1a →  No existen diferencias significativas en el respaldo a los principios de la democracia liberal entre hombres y mujeres.
+1)  H0-1a → No existen diferencias significativas en el respaldo a los principios de la democracia liberal entre hombres y mujeres.
 
-2) H0-1c → Valorar positivamente vivir en democracia no se asocia con un mayor respaldo a los principios de la democracia liberal. 
+2)  H0-1c → Valorar positivamente vivir en democracia no se asocia con un mayor respaldo a los principios de la democracia liberal.
 
 Nivel 2:
 
-1) H0-2b → La valoración promedio de vivir en democracia no se asocia con un mayor respaldo a los principios de la democracia liberal.
+1)  H0-2b → La valoración promedio de vivir en democracia no se asocia con un mayor respaldo a los principios de la democracia liberal.
 
 ## Se acepta:
 
 Nivel 1:
 
-1) $H_1c$: Las personas que valoran positivamente vivir en democracia presentan un mayor respaldo a los principios de la democracia liberal.
+1)  $H_1c$: Las personas que valoran positivamente vivir en democracia presentan un mayor respaldo a los principios de la democracia liberal.
 
 Nivel 2:
 
-1) $H_2b$: Los países donde las personas valoran más vivir en democracia presentan un mayor respaldo promedio a los principios de la democracia liberal.
+1)  $H_2b$: Los países donde las personas valoran más vivir en democracia presentan un mayor respaldo promedio a los principios de la democracia liberal.
 
 ## Observaciones:
 
 1)  El efecto mujer es relevante, pero varía según el contexto democrático.
 
-2)  P01 de -0,84: A mayor percepción promedio de valores democráticos, menor incidencia de variables exógenas.
-
-3)  LLama la atención que el coeficiente de prom_imp_dem  es mayor que su forma individual imp_dem, lo que indicaría que la percepción del contexto es más influyente que la individual.
+2)  Llama la atención que el coeficiente de prom_imp_dem es mayor que su forma individual imp_dem, lo que indicaría que la percepción del contexto es más influyente que la individual.
 
 ## Limitaciones:
 
