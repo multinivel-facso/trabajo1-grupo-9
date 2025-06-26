@@ -177,7 +177,7 @@ $$
 + e_{ij}
 $$
 
-## Modelo 3 multinivel:
+## Modelo 3 combinado:
 
 $$
 \text{Y}_{ij} \;=\; \gamma_{00}
