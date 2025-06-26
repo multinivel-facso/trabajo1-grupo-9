@@ -457,7 +457,7 @@ plot(estex.m23, which="cook",
 
 2)  Orden temporal entre variables es debatible (imp_dem → índice_dem).
 
-# Referencias
+## Referencias
 
 Alexander, A. C., & Welzel, C. (2011). Empowering women: The role of emancipative beliefs. European Sociological Review, 27(3), 364–384. https://doi.org/10.1093/esr/jcq012
 
