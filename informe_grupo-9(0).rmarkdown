@@ -8,8 +8,6 @@ format: html
 editor: visual
 ---
 
-
-
 # Abstract
 
 En la presente investigación, se estudia cómo inciden las percepciones individuales y los ambientes democráticos nacionales en el apoyo ciudadano a los principios fundamentales de la democracia liberal a nivel mundial. Se utilizaron los datos de World Values Survey (Ola 7) para crear un modelo multinivel; a partir de esto, se realizó un índice de percepción sobre principios de la democracia liberal, compuesto por percepciones respecto a los derechos civiles, las elecciones libres y la igualdad género. Preliminarmente, los resultados indican una varianza significativa entre países (ICC =0,148); en este sentido, la valoración individual a la democracia y la atmosfera democrática nacional muestran efectos positivos en el respaldo democrático, pero tanto el nivel económico cómo el género presentan resultados mixtos.
@@ -94,8 +92,6 @@ Se busca realizar un análisis empírico a través de un modelo estadístico mul
 
 Por otro lado, las variables independientes contextuales (nivel 2) son las siguientes: 1) Percepción de cuán democrático es un país (Q251 promedio por país) y 2) Importancia de vivir en un país democrático (Q250 promedio por país). Finalmente, la variable tipo cluster es utilizada es país (B_COUNTRY) que tiene de posibles valores 66 países a nivel mundial dentro de la base de datos de la WVS, Wave 7.
 
-
-
 ```{r librerias, echo=FALSE, warning=FALSE, message=FALSE, collapse=TRUE}
 
 #| label: load-packages
@@ -114,13 +110,9 @@ load(file="procesamiento/data/data.RData")
 
 ```
 
-
-
 ## Estadísticos descriptivos
 
 ##### Tabla 1, Estadísticos descriptivos univariados nivel 1
-
-
 
 ```{r tbl-descriptivos-nivel1, echo=FALSE, warning=FALSE, message=FALSE}
 
@@ -135,11 +127,7 @@ datos_limpios %>% select(indice_dem, país, grp_econ, imp_dem, mujer) %>%
 
 ```
 
-
-
 ##### Tabla 2, Estadisticos descriptivos univariados nivel 2
-
-
 
 ```{r tbl-descriptivos-nivel2, echo=FALSE, warning=FALSE, message=FALSE }
 agg_datos <- datos %>% group_by(país) %>% summarise_all(mean) %>% as.data.frame()
@@ -147,8 +135,6 @@ agg_datos %>% select(cuan_dem, prom_imp_dem) %>%
   sjmisc::descr(show = c("label", "range", "mean", "sd", "NA.prc", "n")) %>%
   kable(., digits = 2, "markdown", caption = "Variables nivel 2")
 ```
-
-
 
 Los valores medios de las variables incluidas muestran un alto respaldo general a la democracia liberal (media del índice ≈ 25), con varianzas relevantes entre países y grupos sociodemográficos. Se observa también una alta valoración subjetiva de la democracia (Q250), con medias sobre 8 en la mayoría de los países.
 
@@ -203,18 +189,12 @@ Yij = β₀ + β₁(grp_econij) + β₂(mujerij) + β₃(imp_demij)
 
 ## bivariados
 
-
-
 ```{r echo=FALSE, warning=FALSE, message=FALSE, results='hide'  }
 dat_scat= datos %>% group_by(país) %>% select(cuan_dem, indice_dem) %>% na.omit() %>% summarise_all(mean)
 names(dat_scat)
 ```
 
-
-
 # Gráfico 1, Relación de promedio de percepción sobre cuan democratico es un país con Índice de Percepción sobre Principios de la Democracia Liberal
-
-
 
 ```{r  echo=FALSE, warning=FALSE, message=FALSE }
 sjPlot::plot_scatter(dat_scat, cuan_dem,indice_dem,
@@ -229,11 +209,7 @@ dat_scat= datos %>% group_by(país) %>% select(prom_imp_dem, indice_dem) %>% na.
 names(dat_scat)
 ```
 
-
-
 # Gráfico 2, Relación de promedio de importancia de vivir en un país democratico con Índice de Percepción sobre Principios de la Democracia Liberal
-
-
 
 ```{r  echo=FALSE, warning=FALSE, message=FALSE }
 sjPlot::plot_scatter(dat_scat, prom_imp_dem,indice_dem,
@@ -243,11 +219,7 @@ sjPlot::plot_scatter(dat_scat, prom_imp_dem,indice_dem,
             )
 ```
 
-
-
 ## Modelos
-
-
 
 ```{r  echo=FALSE, warning=FALSE, message=FALSE }
 results_0 <- lmer(indice_dem ~ 1 + (1 | país), data = datos)
@@ -315,21 +287,13 @@ reg2_centrada <- lmer(indice_dem ~ 1 + imp_dem_cmc + grp_econ_cmc + mujer + cuan
 
 ```
 
-
-
 ##### Tabla 3, Modelos preliminares
-
-
 
 ```{r echo=FALSE, warning=FALSE, message=FALSE}
 tab_model(results_0, results_1, results_2, results_3, reg2, show.ci = FALSE, show.se = TRUE, dv.labels = c( "Nulo", "Var. Niv. 1","Var. Niv 2", "Combinado", "Pendiente Aleatoria"))
 ```
 
-
-
 ##### Tabla 4, Modelos centrados e interacción
-
-
 
 ```{r echo=FALSE, warning=FALSE, message=FALSE, results='hide'}
 # interacción entre niveles
@@ -352,8 +316,6 @@ model_int=lmer(indice_dem ~1 + imp_dem_cmc + grp_econ_cmc + mujer*cuan_dem_gmc +
 ```{r echo=FALSE, warning=FALSE, message=FALSE}
 tab_model(results_0, results_1_centrado, results_2_centrado, results_3_centrados, reg2_centrada, model_int, show.ci = FALSE, show.se = TRUE, dv.labels = c( "Nulo", "Var. Niv. 1 (centrado)", "Var. Niv. 2 (centrado)", "Combinado (centrado)", "Pendiente Aleatoria (centrado)", "Interacción entre niveles"))
 ```
-
-
 
 ### Modelo Nulo
 
@@ -381,8 +343,6 @@ El modelo con efectos aleatorios en las pendientes de la variable "Importancia a
 
 Por otro lado, se obtuvo un t11 de 0,20, lo que significa que hay una variación baja de las pendiente aleatoria entre países. Mientras tanto, el P0 de -0,84, indica que a mayor intercepto, las variables tienen menor pendiente. En el caso de la variable importancia de la democracia, esto indica que mientras mayor sea el valor del índice de percepción de valores de la democracia liberal cuando esta es 0, en cada grupo, menor será su efecto. Esto puede tomarse como que en grupos donde en promedio se tiene una alta valoración de los principios de la democracia liberal, las variables exógenas tienen baja incidencia.
 
-
-
 ```{r echo=FALSE, warning=FALSE, message=FALSE}
 
 anova_tabla2 <- anova(results_3_centrados, reg2_centrada)
@@ -405,11 +365,7 @@ kable(anova_tabla3, caption = "Tabla de devianza 2: Comparación Pendiente Fija 
 
 ```
 
-
-
 ##### Gráfico de interceptos aleatorios
-
-
 
 ```{r figure1-Interceptos_aleatorios, echo=FALSE, warning=FALSE, message=FALSE }
 ggplot(datos, aes(imp_dem, m1, color = país, group = país),
@@ -436,22 +392,14 @@ plot(plt) +
 
 ```
 
-
-
 # Interacción entre niveles
-
-
 
 ```{r echo=FALSE, warning=FALSE, message=FALSE}
 # grafico interacción
 plot_model(model_int, type = "int")
 ```
 
-
-
 # Casos influyentes
-
-
 
 ```{r echo=FALSE, warning=FALSE, message=FALSE, results='hide'}
 # Casos influyentes
@@ -483,43 +431,40 @@ plot(estex.m23, which="cook",
      ylab="país")
 ```
 
-
-
 # Conclusión
 
 Preliminarmente, los hallazgos indican una varianza significativa entre países (ICC=15% redondeada) y se pueden identificar efectos positivos respecto a la atmosfera democrática y la valoración individual a la democracia respecto a los principios liberales democráticos. Pero variables como género y nivel educativo no muestran significancia. Respecto al informe final se considera que el modelo multinivel completo tendrá mayor ajuste teórico, ya que considera todos los niveles por lo que se obtendrá un buen cálculo de la relevancia individual de la democracia y cómo esta se relaciona con el promedio nacional; permitiendo predictores más significativos.
 
 # Referencias bibliográficas
 
-Alexander, A. C., & Welzel, C. (2011). Empowering women: The role of emancipative beliefs. European Sociological Review, 27(3), 364–384. https://doi.org/10.1093/esr/jcq012
+Alexander, A. C., & Welzel, C. (2011). Empowering women: The role of emancipative beliefs. European Sociological Review, 27(3), 364–384. <https://doi.org/10.1093/esr/jcq012>
 
 Almond, G. A., & Verba, S. (1963). The Civic Culture: Political Attitudes and Democracy in Five Nations. Princeton University Press.
 
-Ariely, G., & Davidov, E. (2011). Can we rate public support for democracy in a comparable way? Social Indicators Research, 104(2), 271–286. https://doi.org/10.1007/s11205-010-9693-5
+Ariely, G., & Davidov, E. (2011). Can we rate public support for democracy in a comparable way? Social Indicators Research, 104(2), 271–286. <https://doi.org/10.1007/s11205-010-9693-5>
 
-Bellino, M. J. (2017). Democracia liberal y democracia participativa: una tensión no resuelta. Revista LyE, (25), 1–20. http://revistas.derecho.uba.ar/index.php/revistalye/article/view/1037
+Bellino, M. J. (2017). Democracia liberal y democracia participativa: una tensión no resuelta. Revista LyE, (25), 1–20. <http://revistas.derecho.uba.ar/index.php/revistalye/article/view/1037>
 
-Castro Domingo, P. (2011). Cultura política: una propuesta socio-antropológica de la construcción de sentido en la política. Región y Sociedad, 23(50), 215–247. http://www.redalyc.org/articulo.oa?id=10218443009
+Castro Domingo, P. (2011). Cultura política: una propuesta socio-antropológica de la construcción de sentido en la política. Región y Sociedad, 23(50), 215–247. <http://www.redalyc.org/articulo.oa?id=10218443009>
 
-Córdoba Gómez, M. (2008). Democracia liberal y democracia participativa: una tensión no resuelta. Andamios, 5(10), 9–32. https://www.scielo.org.mx/scielo.php?script=sci_arttext&pid=S1870-0063200800030000
+Córdoba Gómez, M. (2008). Democracia liberal y democracia participativa: una tensión no resuelta. Andamios, 5(10), 9–32. <https://www.scielo.org.mx/scielo.php?script=sci_arttext&pid=S1870-0063200800030000>
 
-Finch, W. H., Bolin, J. E., & Kelley, K. (2014). Multilevel modeling using R. CRC Press. https://doi.org/10.1201/b16042
+Finch, W. H., Bolin, J. E., & Kelley, K. (2014). Multilevel modeling using R. CRC Press. <https://doi.org/10.1201/b16042>
 
-Franetovic, G., & Castillo, J.-C. (2022). Preferences for income redistribution in unequal contexts: Changes in Latin America between 2008 and 2018. Frontiers in Sociology, 7, 806458. https://doi.org/10.3389/fsoc.2022.806458
+Franetovic, G., & Castillo, J.-C. (2022). Preferences for income redistribution in unequal contexts: Changes in Latin America between 2008 and 2018. Frontiers in Sociology, 7, 806458. <https://doi.org/10.3389/fsoc.2022.806458>
 
 Goldstein, H. (1995). Multilevel statistical models (2nd ed.). Edward Arnold.
 
 Inglehart, R., & Welzel, C. (2005a). Modernization, cultural change, and democracy: The human development sequence. Cambridge University Press.
 
-Inglehart, R., & Welzel, C. (2005b). Liberalism, postmaterialism, and the growth of freedom. International Review of Sociology, 15(1), 81–108. https://doi.org/10.1080/03906700500038579
+Inglehart, R., & Welzel, C. (2005b). Liberalism, postmaterialism, and the growth of freedom. International Review of Sociology, 15(1), 81–108. <https://doi.org/10.1080/03906700500038579>
 
-Kong, M. (2024). Individual Perspectives on Liberal Democracy: Insights from World Values Survey. International Journal of High School Research, 6(4), 45–60. https://doi.org/10.36838/v6i4.5
+Kong, M. (2024). Individual Perspectives on Liberal Democracy: Insights from World Values Survey. International Journal of High School Research, 6(4), 45–60. <https://doi.org/10.36838/v6i4.5>
 
-Lee, S. K. (2024). Inequality and the Eroding Base of Liberal Democracy. Social Science Research, 113, 103087. https://doi.org/10.1016/j.ssresearch.2024.103087
+Lee, S. K. (2024). Inequality and the Eroding Base of Liberal Democracy. Social Science Research, 113, 103087. <https://doi.org/10.1016/j.ssresearch.2024.103087>
 
-Offe, C. (2011). Crisis and innovation of liberal democracy: Can deliberation be institutionalised? Czech Sociological Review, 47(3), 447–472. Our World in Data. (2024). Liberal Democracy Index – V-Dem Central Estimate, Population-Weighted. OurWorldInData.org. https://ourworldindata.org/grapher/liberal-democracy-index
+Offe, C. (2011). Crisis and innovation of liberal democracy: Can deliberation be institutionalised? Czech Sociological Review, 47(3), 447–472. Our World in Data. (2024). Liberal Democracy Index – V-Dem Central Estimate, Population-Weighted. OurWorldInData.org. <https://ourworldindata.org/grapher/liberal-democracy-index>
 
-Serret, E. (2004). Género y democracia. Revista Venezolana de Estudios de la Mujer, 9(21), 35–47. https://www.redalyc.org/pdf/315/31502103.pdf
+Serret, E. (2004). Género y democracia. Revista Venezolana de Estudios de la Mujer, 9(21), 35–47. <https://www.redalyc.org/pdf/315/31502103.pdf>
 
-Wike, R., Silver, L., & Castillo, A. (2019). Many across the globe are dissatisfied with how democracy is working. Pew Research Center. https://www.pewresearch.org/global/2019/04/29/many-across-the-globe-are-dissatisfied-with-how-democracy-is-working/
-
+Wike, R., Silver, L., & Castillo, A. (2019). Many across the globe are dissatisfied with how democracy is working. Pew Research Center. <https://www.pewresearch.org/global/2019/04/29/many-across-the-globe-are-dissatisfied-with-how-democracy-is-working/>
