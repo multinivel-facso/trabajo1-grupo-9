@@ -4,11 +4,13 @@ subtitle: "Análisis de datos multinivel 2025"
 author: "Martina Gallardo, Cristóbal Unda, Diego Vicuña"
 date: "2025-06-30"
 lang: es
-format: html
+format:
+  html:
+    toc: true
+    number-sections: true
+    css: estilos.css
+    math: mathjax
 editor: visual
-output: 
-  html_document:
-    mathjax: default
 ---
 
 # Abstract
@@ -45,7 +47,7 @@ Desde las investigaciones sociológicas, la cultura política ha sido definida
 
 La democracia liberal se entiende como un régimen que combina soberanía popular con límites institucionales al poder del Estado, respeto por los derechos individuales y equidad política entre ciudadanos (Offe, 2011). No obstante, su legitimidad ha sido históricamente restringida hacia mujeres y grupos subalternos (Córdoba Gómez, 2008). Por tanto, estudiar su respaldo desde una perspectiva ciudadana exige también considerar sus fronteras normativas, estructurales e históricas.
 
-Las percepciones individuales tienen un papel central en el respaldo a la democracia liberal. Una variable clave es la importancia atribuida a vivir en democracia, la cual ha demostrado ser un indicador robusto del compromiso normativo con el régimen (Welzel & Inglehart, 2005a). También se consideran el género y la autopercepción económica. En promedio, las mujeres presentan actitudes más igualitarias y proclives a la defensa de los derechos civiles (Alexander & Welzel, 2011). Respecto al estatus socioeconómico, su influencia es más ambigua: podría fomentar valores de competencia individual o, por el contrario, reforzar demandas redistributivas en sectores medios. 
+Las percepciones individuales tienen un papel central en el respaldo a la democracia liberal. Una variable clave es la importancia atribuida a vivir en democracia, la cual ha demostrado ser un indicador robusto del compromiso normativo con el régimen (Welzel & Inglehart, 2005a). También se consideran el género y la autopercepción económica. En promedio, las mujeres presentan actitudes más igualitarias y proclives a la defensa de los derechos civiles (Alexander & Welzel, 2011). Respecto al estatus socioeconómico, su influencia es más ambigua: podría fomentar valores de competencia individual o, por el contrario, reforzar demandas redistributivas en sectores medios.
 
 Además de los factores individuales, este estudio incorpora variables contextuales que capturan el clima democrático nacional: percepción promedio de vivir en democracia e importancia atribuida a la democracia en cada país. Siguiendo a Welzel e Inglehart (2005), estos climas actúan como entornos simbólicos que refuerzan o debilitan las disposiciones individuales. En países con alta valoración democrática, se espera que el respaldo a los principios liberales sea mayor debido a procesos de socialización política más intensos. Desde esta perspectiva, la cultura política se entiende no como un agregado de actitudes individuales, sino como una estructura de sentido compartido (Castro Domingo, 2011).
 
@@ -101,7 +103,7 @@ Analizar cómo inciden las percepciones individuales y los climas democráticos 
 
 -   $H0_3a$ (nula): El efecto del género sobre el respaldo a los principios de democracia liberal no se relacionan de manera significativa con la medida en que el país sea percibido como más democrático.
 
-![](input/img/modelo_visual.png) **Modelo teórico con hipótesis**
+**Modelo teórico con hipótesis** ![](input/img/modelo_visual.png)
 
 # Datos, variables y métodos
 
@@ -176,7 +178,7 @@ A nivel contextual (nivel 2) hay 66 países. El promedio nacional de percepción
 
 # Modelos preliminares
 
-#### Los modelos construidos son los siguientes:
+Los modelos construidos son los siguientes:
 
 **Anotaciones generales de ecuaciones**\
 
@@ -194,14 +196,7 @@ Los modelos construidos son los siguientes:
 
 -   **Modelo con variables nivel 1**: incluye predictores individuales.
 
-$$
-\text{Y}_{ij} \;=\; \gamma_{00}
-+ \gamma_{01}\,(\text{grp_econ}_{ij})
-+ \gamma_{02}\,(\text{mujer}_{ij})
-+ \gamma_{03}\,(\text{prom_imp_dem}_{ij})
-+ u_{0\text{j}}
-+ e_{ij}
-$$
+$Yij = 00 +10+20(mujerij)+ 30(imp_demij)+uoj+ eij$
 
 **grp_econij​**: Autoevaluación de grupo económico.
 
@@ -211,13 +206,7 @@ $$
 
 -   **Modelo con variables nivel 2**: incluye predictores contextuales.
 
-$$
-\text{Y}_{ij} \;=\; \gamma_{00}
-+ \gamma_{01}\,(\text{cuan_dem}_{j})
-+ \gamma_{02}\,(\text{prom_imp_dem}_{j})
-+ u_{0\text{j}}
-+ e_{ij}
-$$
+$Yij = 00 +01(cuan_demj)+ 02(prom_imp_demj)+uoj+ eij$
 
 **cuan_demj​**: Promedio nacional de evaluación sobre cuán democrático es su país.
 
@@ -225,45 +214,15 @@ $$
 
 -   **Modelo combinado**: Combina variables de ambos niveles, mostrando que los factores contextuales y personales inciden conjuntamente en el apoyo a la democracia.
 
-$$
-\text{Y}_{ij} \;=\; \gamma_{00}
-+ \gamma_{10}\,(\text{grp_econ}_{ij})
-+ \gamma_{20}\,(\text{mujer}_{ij})
-+ \gamma_{30}\,(\text{imp_dem}_{ij})
-+ \gamma_{01}\,(\text{cuan_dem}_{j})
-+ \gamma_{02}\,(\text{prom_imp_dem}_{j})
-+ u_{0\text{j}}
-+ e_{ij}
-$$
+$Yij = 00 +10+20(mujerij)+30(imp_demij)+01(cuan_demj) + 02(prom_imp_demj)+uoj+ eij$
 
 -   **Modelo con pendiente aleatoria**: Combina ambos niveles con efectos aleatorios en las pendientes de la variable "Importancia atribuida a vivir en democracia".
 
-$$
-\text{Y}_{ij} \;=\; \gamma_{00}
-+ \gamma_{10}\,(\text{grp_econ}_{ij})
-+ \gamma_{20}\,(\text{mujer}_{ij})
-+ \gamma_{30}\,(\text{imp_dem}_{ij})
-+ \gamma_{01}\,(\text{cuan_dem}_{j})
-+ \gamma_{02}\,(\text{prom_imp_dem}_{j})
-+ u_{0\text{j}}
-+ u_{\text{1j}}(\text{imp_dem}_{ij})
-+ e_{ij}
-$$
+$Yij = 00 +10+20(mujerij)+30(imp_demij)+01(cuan_demj) + 02(prom_imp_demj)+uoj+u1j(imp_demij)+ eij$
 
 -   **Modelo de interacción**: Combina ambos niveles con pendiente aleatoria en variable “género”, más interacción entre la variable “Género” de nivel 1 y “promedio nacional de percepción sobre cuán democrático es un país” de nivel 2.
 
-$$
-\text{Y}_{ij} \;=\; \gamma_{00}
-+ \gamma_{10}\,(\text{grp_econ}_{ij})
-+ \gamma_{20}\,(\text{mujer}_{ij})
-+ \gamma_{30}\,(\text{imp_dem}_{ij})
-+ \gamma_{01}\,(\text{cuan_dem}_{j})
-+ \gamma_{02}\,(\text{prom_imp_dem}_{j})
-+ \gamma_{21}\,(\text{mujer}_{ij}⋅\text{cuan_dem}_{j})
-+ u_{0\text{j}}
-+ u_{\text{1j}}(\text{mujer}_{ij})
-+ e
-$$
+$Yij = 00 +10+20(mujerij)+30(imp_demij)+01(cuan_demj) + 02(prom_imp_demj)+ 21(mujerij ⋅ cuan_demj)+uoj+u1j(mujerij)+e$
 
 # Análisis y resultados preliminares
 
@@ -607,7 +566,7 @@ Se calculó la distancia de cook para estimar la existencia de casos influyentes
 
 Los hallazgos confirman que una parte significativa de la varianza de la variable dependiente puede ser explicada por la diferencia entre países (ICC=15%), de manera que se ve confirmada la necesidad de haber estimado modelos multinivel que tomaran en consideración el contexto. Dentro de dichos modelos, fue el modelo que considera variables de ambos niveles y aleatorizando la pendiente de la variable de importancia de vivir en democracia la que tuvo mejor ajuste, es decir, el que se acerca más a la realidad de los datos y, por tanto, en la que nos basamos finalmente para aceptar o rechazar nuestras hipótesis.
 
-![](input/img/modelo_teórico_resultados.png) **Modelo teórico con resultados**
+**Modelo teórico con resultados** ![](input/img/modelo_teórico_resultados.png)
 
 En este sentido, los resultados permitieron rechazar las hipótesis nulas $H0_1a$, $H0_1c$ y $H0-2b$, dado que si existía una diferencia entre hombres y mujeres y una influencia de la importancia atribuida a vivir en democracia, tanto a nivel individual como en el contexto, en la adhesión a principios de la democracia liberal. Sin embargo, mientras que $H_1c$ y $H_2b$ fueron aceptadas, estimándose a partir de los modelos la dirección favorable que se creyó que la importancia de vivir en democracia tendría sobre la adhesión a sus principios, esto no sucedió con la variable género, donde la relación fue en sentido contrario. Si bien el efecto no es muy grande (-0,11), que la diferencia sea entre hombres y mujeres muestra que las mujeres son quienes presentan menor adhesión a los principios de la democracia liberal, considerando que el índice incluía una dimensión de igualdad de género llama la atención.
 
