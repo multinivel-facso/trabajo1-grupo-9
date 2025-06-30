@@ -196,7 +196,7 @@ Los modelos construidos son los siguientes:
 
 -   **Modelo con variables nivel 1**: incluye predictores individuales.
 
-$Yij = 00 +10+20(mujerij)+ 30(imp_demij)+uoj+ eij$
+$Yij = Y00 +Y10+Y20(mujerij)+ Y30(imp_demij)+uoj+ eij$
 
 **grp_econij​**: Autoevaluación de grupo económico.
 
@@ -206,7 +206,7 @@ $Yij = 00 +10+20(mujerij)+ 30(imp_demij)+uoj+ eij$
 
 -   **Modelo con variables nivel 2**: incluye predictores contextuales.
 
-$Yij = 00 +01(cuan_demj)+ 02(prom_imp_demj)+uoj+ eij$
+$Yij = Y00 +Y01(cuan_demj)+ Y02(prom_imp_demj)+uoj+ eij$
 
 **cuan_demj​**: Promedio nacional de evaluación sobre cuán democrático es su país.
 
@@ -214,15 +214,15 @@ $Yij = 00 +01(cuan_demj)+ 02(prom_imp_demj)+uoj+ eij$
 
 -   **Modelo combinado**: Combina variables de ambos niveles, mostrando que los factores contextuales y personales inciden conjuntamente en el apoyo a la democracia.
 
-$Yij = 00 +10+20(mujerij)+30(imp_demij)+01(cuan_demj) + 02(prom_imp_demj)+uoj+ eij$
+$Yij = Y00 +Y10+Y20(mujerij)+Y30(imp_demij)+Y01(cuan_demj) + Y02(prom_imp_demj)+uoj+ eij$
 
 -   **Modelo con pendiente aleatoria**: Combina ambos niveles con efectos aleatorios en las pendientes de la variable "Importancia atribuida a vivir en democracia".
 
-$Yij = 00 +10+20(mujerij)+30(imp_demij)+01(cuan_demj) + 02(prom_imp_demj)+uoj+u1j(imp_demij)+ eij$
+$Yij = Y00 +Y10+Y20(mujerij)+Y30(imp_demij)+Y01(cuan_demj) + Y02(prom_imp_demj)+uoj+u1j(imp_demij)+ eij$
 
 -   **Modelo de interacción**: Combina ambos niveles con pendiente aleatoria en variable “género”, más interacción entre la variable “Género” de nivel 1 y “promedio nacional de percepción sobre cuán democrático es un país” de nivel 2.
 
-$Yij = 00 +10+20(mujerij)+30(imp_demij)+01(cuan_demj) + 02(prom_imp_demj)+ 21(mujerij ⋅ cuan_demj)+uoj+u1j(mujerij)+e$
+$Yij = Y00 +Y10+Y20(mujerij)+Y30(imp_demij)+Y01(cuan_demj) + Y02(prom_imp_demj)+ Y21(mujerij ⋅ cuan_demj)+uoj+u1j(mujerij)+e$
 
 # Análisis y resultados preliminares
 
@@ -253,7 +253,7 @@ Grafico1
 
 ```
 
-En el @fig-1 se observa una relación positiva entre la percepción promedio sobre cuán democrático es un país y el nivel de adhesión a principios de la democracia liberal. Por lo que en los países donde la percepción democrática por parte de sus ciudadanos es más alta, también tienden estos mismos a respaldar y adherir a valores liberales fundamentales de la democracia.
+En la @fig-1 se observa una relación positiva entre la percepción promedio sobre cuán democrático es un país y el nivel de adhesión a principios de la democracia liberal. Por lo que en los países donde la percepción democrática por parte de sus ciudadanos es más alta, también tienden estos mismos a respaldar y adherir a valores liberales fundamentales de la democracia.
 
 ```{r echo=FALSE, warning=FALSE, message=FALSE, results='hide'  }
 dat_scat= datos %>% group_by(país) %>% select(prom_imp_dem, indice_dem) %>% na.omit() %>% summarise_all(mean)
@@ -280,9 +280,9 @@ Grafico2 <- sjPlot::plot_scatter(dat_scat, prom_imp_dem,indice_dem,
 Grafico2
 ```
 
-El @fig-2 muestra una clara relación positiva entre el promedio nacional de importancia asignada a vivir en un país democrático y el índice de adhesión a principios de la democracia liberal. Esta pendiente positiva indicaría que en aquellos países donde la democracia es altamente valorada, también existe un mayor grado de internalización de sus principios fundamentales, como las elecciones libres, la igualdad ante la ley y la protección de derechos individuales.
+La @fig-2 muestra una clara relación positiva entre el promedio nacional de importancia asignada a vivir en un país democrático y el índice de adhesión a principios de la democracia liberal. Esta pendiente positiva indicaría que en aquellos países donde la democracia es altamente valorada, también existe un mayor grado de internalización de sus principios fundamentales, como las elecciones libres, la igualdad ante la ley y la protección de derechos individuales.
 
-A diferencia del @fig-1, que mostraba la relación entre la percepción institucional de cuán democrático es un país y la adhesión a principios liberales, aquí se destaca el peso del clima político o cultura cívica.
+A diferencia de la @fig-1, que mostraba la relación entre la percepción institucional de cuán democrático es un país y la adhesión a principios liberales, aquí se destaca el peso del clima político o cultura cívica.
 
 ## Modelos
 
