@@ -6,10 +6,9 @@ date: "2025-06-30"
 lang: es
 format: html
 editor: visual
-output: 
-  html_document:
-    mathjax: default
 ---
+
+
 
 # Abstract
 
@@ -101,7 +100,9 @@ Analizar cómo inciden las percepciones individuales y los climas democráticos 
 
 -   $H0_3a$ (nula): El efecto del género sobre el respaldo a los principios de democracia liberal no se relacionan de manera significativa con la medida en que el país sea percibido como más democrático.
 
-![](input/img/modelo_visual.png) **Modelo teórico con hipótesis**
+![](input/img/modelo_visual.png)
+**Modelo teórico con hipótesis**
+
 
 # Datos, variables y métodos
 
@@ -110,6 +111,8 @@ Se utilizó la base de datos de la séptima ola del World Values Survey (2017–
 ## Variables
 
 La variable dependiente es el Índice de Percepción sobre Principios de Democracia Liberal (rango: 0–30). Las variables independientes de nivel individual (nivel 1) incluyen: género (1 = mujer), autopercepción de grupo económico e importancia de vivir en democracia. A nivel contextual (nivel 2), se consideran las variables del promedio nacional de percepción sobre cuán democrático es un país e importancia de vivir en un país democrático. El país se incluye como variable de agrupación (cluster).
+
+
 
 ```{r librerias, echo=FALSE, warning=FALSE, message=FALSE, collapse=TRUE}
 
@@ -129,7 +132,11 @@ load(file="procesamiento/data/data.RData")
 
 ```
 
+
+
 ## Estadísticos descriptivos
+
+
 
 ```{r  echo=FALSE, warning=FALSE, message=FALSE}
 
@@ -152,7 +159,11 @@ tab_des_1 <- datos_limpios %>% select(indice_dem, país, grp_econ, imp_dem, muje
 tab_des_1
 ```
 
+
+
 A nivel individual (nivel 1) hay 88.000 casos, el promedio de adhesión a los principios de la democracia liberales es de 23.4 en una escala del 0 al 30, lo que demuestra que en promedio hay una alta adhesión a los principios democráticos liberales. Respecto a la variable de autopercepción de grupo económico se encuentra al centro de la escala con una media de 4.95 en una escala del 1 al 10. La variable de importancia que se le otorga a la democracia tiene una media de 8.4 en una escala del 1 al 10. El 52% de la muestra son mujeres.
+
+
 
 ```{r  echo=FALSE, warning=FALSE, message=FALSE, results='hide'}
  agg_datos <- datos %>% group_by(país) %>% summarise_all(mean) %>% as.data.frame()
@@ -171,6 +182,8 @@ agg_datos %>% select(cuan_dem, prom_imp_dem) %>%
   sjmisc::descr(show = c("label", "range", "mean", "sd", "NA.prc", "n")) %>%
   kable(., digits = 2, "markdown", caption = "Variables nivel 2")
 ```
+
+
 
 A nivel contextual (nivel 2) hay 66 países. El promedio nacional de percepción de vivir en democracia es de 6. 08 en una escala del 1 al 10. Y el promedio nacional de importancia atribuida de vivir en democracia es de 8.29 en una escala del 1 al 10; lo que demuestra poca variabilidad entre países.
 
@@ -269,6 +282,8 @@ $$
 
 ## Análisis bivariados
 
+
+
 ```{r echo=FALSE, warning=FALSE, message=FALSE, results='hide'  }
 dat_scat= datos %>% group_by(país) %>% select(cuan_dem, indice_dem) %>% na.omit() %>% summarise_all(mean)
 names(dat_scat)
@@ -294,7 +309,11 @@ Grafico1
 
 ```
 
+
+
 En el @fig-1 se observa una relación positiva entre la percepción promedio sobre cuán democrático es un país y el nivel de adhesión a principios de la democracia liberal. Por lo que en los países donde la percepción democrática por parte de sus ciudadanos es más alta, también tienden estos mismos a respaldar y adherir a valores liberales fundamentales de la democracia.
+
+
 
 ```{r echo=FALSE, warning=FALSE, message=FALSE, results='hide'  }
 dat_scat= datos %>% group_by(país) %>% select(prom_imp_dem, indice_dem) %>% na.omit() %>% summarise_all(mean)
@@ -321,6 +340,8 @@ Grafico2 <- sjPlot::plot_scatter(dat_scat, prom_imp_dem,indice_dem,
 Grafico2
 ```
 
+
+
 El @fig-2 muestra una clara relación positiva entre el promedio nacional de importancia asignada a vivir en un país democrático y el índice de adhesión a principios de la democracia liberal. Esta pendiente positiva indicaría que en aquellos países donde la democracia es altamente valorada, también existe un mayor grado de internalización de sus principios fundamentales, como las elecciones libres, la igualdad ante la ley y la protección de derechos individuales.
 
 A diferencia del @fig-1, que mostraba la relación entre la percepción institucional de cuán democrático es un país y la adhesión a principios liberales, aquí se destaca el peso del clima político o cultura cívica.
@@ -332,6 +353,8 @@ En la siguiente tabla se presentan los resultados de los modelos descritos en el
 Dentro de las variables de nivel 1, las variables autopercepción de grupo económico e importancia de vivir en democracia fueron centradas a la media del grupo (CWC), para aislar los efectos internos del grupo con los efectos entre ellos.
 
 Las variables de nivel 2 fueron centradas a la media general (CGM), para conservar la variación entre los grupos. Gracias a esto se pueden observar los efectos de las variables de forma más pura; además, se le entrega un sentido al intercepto, que es el de representar para un caso un valor promedio en las variables. Sin embargo, la variable género no fue centrada, dado que su valor 0, ya tenía significado (0 = hombre).
+
+
 
 ```{r  echo=FALSE, warning=FALSE, message=FALSE }
 results_0 <- lmer(indice_dem ~ 1 + (1 | país), data = datos)
@@ -429,6 +452,8 @@ tab_model <- tab_model(results_0, results_1_centrado, results_2_centrado, result
 tab_model
 ```
 
+
+
 ### Modelo Nulo
 
 El modelo nulo permite observar parámetros sin la inclusión de variables explicativas. Por ejemplo, según se observa en la tabla 3, se estimó un intercepto de 23,32, correspondiente al promedio del índice de percepción sobre valores de democracia liberal; pero ajustado a la variación entre los grupos, aunque resultando en un valor menor en apenas 0,04 respecto el promedio estimado en los estadísticos descriptivos. Pero lo que demuestra que en promedio hay una alta valoración de principios democráticos liberales, tomando en cuenta que el índice comprende valores del 0 al 30. Luego, también se obtuvo un $\sigma^2$ de 34,40, lo que indica una alta varianza a nivel individual, es decir, dentro de los grupos, mientras que, por otro lado, se calculó un $t_{00}$ de 6,02, lo que indica una varianza más bien moderada a nivel grupal, es decir, entre los grupos.
@@ -465,6 +490,8 @@ Respecto a los otros coeficientes de las variables explicativas, la variable “
 
 Por otro lado, se obtuvo un $t_{11}$ de 0,20, lo que significa que hay una variación baja de la pendiente aleatoria entre países. Mientras tanto, el $P_0$ de 0,41, indica que a mayor intercepto, las variables tienen mayor pendiente. En el caso de la variable importancia de la democracia, esto indica que mientras mayor sea el valor del índice de percepción de valores de la democracia liberal cuando esta es 0, en cada grupo, mayor será su efecto, es decir, si de base ya hay adhesión a los principios de la democracia, el valorar que es importante vivir en ella, los reforzará aún más.
 
+
+
 ```{r echo=FALSE, warning=FALSE, message=FALSE }
 
 plt <- ggpredict(
@@ -491,9 +518,13 @@ Grafico3 <- plot(plt) +
 Grafico3
 ```
 
+
+
 ### Modelo de interacción
 
 Se estimó un modelo de interacción entre niveles, estimando la interacción entre la variable mujer (nivel 1) y la variable promedio nacional de percepción de cuán democratico es un país (nivel 2). Para esto, se aleatorizó la pendiente a la variable mujer, para que pudiera variar entre grupos y observar su interacción con la variable nivel 2. A pesar de que la variable de cuán democratico es un país no hubiera sido significativa en los modelos anteriores, tiene sentido haberla usado en este, pues esas significancias referían a su efecto directo y no al efecto que podría tener como moderador de otra variable.
+
+
 
 ```{r echo=FALSE, warning=FALSE, message=FALSE}
 # grafico interacción
@@ -513,11 +544,15 @@ Grafico4 <-plot_model(model_int, type = "int") + labs(
 Grafico4
 ```
 
+
+
 La interacción entre género y el promedio de percepción de cuan democrático es un país tuvo un valor $p$ no significativo, de 0,225. De todas formas, el coeficiente de regresión estimado era de -0,08, lo que hubiera significado que, contrario a la hipótesis planteada $H_3a$, el efecto negativo del género (ser mujer) sobre el respaldo a los principios de la democracia liberal es más intenso a medida que el país sea percibido más democrático. Esto quiere decir, que la diferencia del respaldo a los principios de democracia liberal entre hombres y mujeres es más grande en países percibidos más democráticos, no que las mujeres en promedio sean más antidemocráticas. Sin embargo, esta interacción de todas formas no es significativa.
 
 ## Devianza
 
 Se estimó un test de devianza para comparar el ajuste de los modelos. Primero, se comparó el Modelo combinado con el Modelo con pendiente aleatoria, como se observa en la siguiente tabla:
+
+
 
 ```{r echo=FALSE, warning=FALSE, message=FALSE}
 
@@ -539,7 +574,11 @@ tabla4
 
 ```
 
+
+
 A partir de estos resultados, se puede concluir que el modelo con pendiente aleatoria en la variable importancia de la democracia tiene mejor ajuste a la realidad de los datos que el modelo con pendientes fijas. Esta ya que la devianza del modelo con pendiente aleatoria es 2344,2 menor que la del modelo con pendientes fijas, lo que en relación según el $Pr(>Chisq)$ con valor 0, es significativo.
+
+
 
 ```{r echo=FALSE, warning=FALSE, message=FALSE}
 
@@ -561,9 +600,13 @@ tabla5
 
 ```
 
+
+
 Por otro lado, como el modelo de interacción se calculó con una pendiente aleatoria distinta (mujer) a la del modelo anterior (Importancia de vivir en democracia), también se hizo un test de devianza, como se observa en la tabla 5, que señaló que el modelo de interacción tenía mejor ajuste que el modelo con pendientes fijas, con una devianza 105,28 menor. Sin embargo, el modelo anterior con pendiente aleatoria en la variable de importancia de vivir en democracia tiene un mejor ajuste, al tener una devianza mucho menor en comparación.
 
 # Casos influyentes
+
+
 
 ```{r echo=FALSE, warning=FALSE, message=FALSE, results='hide'}
 # Casos influyentes
@@ -601,13 +644,16 @@ plot(estex.m23, which="cook",
 
 ```
 
+
+
 Se calculó la distancia de cook para estimar la existencia de casos influyentes que distorsionaran los parámetros de los modelos, como se puede observar en el figura 5, sin embargo, ningún coeficiente cambia de significancia por la eliminación de algún grupo (changed.sig = FALSE). De esta manera se puede afirmar que no hay casos influyentes que distorsionen los parámetros de los modelos.
 
 # Conclusión
 
 Los hallazgos confirman que una parte significativa de la varianza de la variable dependiente puede ser explicada por la diferencia entre países (ICC=15%), de manera que se ve confirmada la necesidad de haber estimado modelos multinivel que tomaran en consideración el contexto. Dentro de dichos modelos, fue el modelo que considera variables de ambos niveles y aleatorizando la pendiente de la variable de importancia de vivir en democracia la que tuvo mejor ajuste, es decir, el que se acerca más a la realidad de los datos y, por tanto, en la que nos basamos finalmente para aceptar o rechazar nuestras hipótesis.
 
-![](input/img/modelo_teórico_resultados.png) **Modelo teórico con resultados**
+![](input/img/modelo_teórico_resultados.png)
+**Modelo teórico con resultados**
 
 En este sentido, los resultados permitieron rechazar las hipótesis nulas $H0_1a$, $H0_1c$ y $H0-2b$, dado que si existía una diferencia entre hombres y mujeres y una influencia de la importancia atribuida a vivir en democracia, tanto a nivel individual como en el contexto, en la adhesión a principios de la democracia liberal. Sin embargo, mientras que $H_1c$ y $H_2b$ fueron aceptadas, estimándose a partir de los modelos la dirección favorable que se creyó que la importancia de vivir en democracia tendría sobre la adhesión a sus principios, esto no sucedió con la variable género, donde la relación fue en sentido contrario. Si bien el efecto no es muy grande (-0,11), que la diferencia sea entre hombres y mujeres muestra que las mujeres son quienes presentan menor adhesión a los principios de la democracia liberal, considerando que el índice incluía una dimensión de igualdad de género llama la atención.
 
@@ -658,3 +704,4 @@ Offe, C. (2011). Crisis and innovation of liberal democracy: Can deliberation be
 Our World in Data. (2024). Liberal Democracy Index – V-Dem Central Estimate, Population-Weighted. OurWorldInData.org. https://ourworldindata.org/grapher/liberal-democracy-index
 
 Wike, R., Silver, L., & Castillo, A. (2019). Many across the globe are dissatisfied with how democracy is working. Pew Research Center. https://www.pewresearch.org/global/2019/04/29/many-across-the-globe-are-dissatisfied-with-how-democracy-is-working/
+
